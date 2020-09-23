@@ -104,7 +104,7 @@ export class CardStack extends TabletopObject {
 
   uprightAll() {
     for (let card of this.cards) {
-      card.rotate = 0;
+      card.uplight();
       this.setSamePositionFor(card);
     }
   }

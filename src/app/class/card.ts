@@ -46,6 +46,20 @@ export class Card extends TabletopObject {
     this.owner = '';
   }
 
+  uplight() {
+    const el: HTMLElement = document.querySelector('game-table > .component > .component-content');
+    const transform = el.style.transform;
+    const matches = transform.match(/rotateZ\((-?\d+)deg\)/);
+    let rotate = 0;
+    if (matches) {
+      const rotateZ = (Number(matches[1]) % 360 + 360) % 360;
+      if (90 < rotateZ && rotateZ <= 270) {
+        rotate = 180;
+      }
+    }
+    this.rotate = rotate;
+  }
+
   toTopmost() {
     moveToTopmost(this, ['card-stack']);
   }
