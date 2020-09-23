@@ -343,60 +343,111 @@ export class TabletopService {
   }
 
   makeDefaultTabletopObjects() {
-    let testCharacter: GameCharacter = null;
-    let testFile: ImageFile = null;
-    let fileContext: ImageContext = null;
+    let front: string = './assets/furuyoni_commons_custom/sakura_token_2_1x1.png';
+    if (!ImageStorage.instance.get(front)) {
+      ImageStorage.instance.add(front);
+    }
 
-    testCharacter = new GameCharacter('testCharacter_1');
-    fileContext = ImageFile.createEmpty('testCharacter_1_image').toContext();
-    fileContext.url = './assets/images/mon_052.gif';
-    testFile = ImageStorage.instance.add(fileContext);
-    testCharacter.location.x = 5 * 50;
-    testCharacter.location.y = 9 * 50;
-    testCharacter.initialize();
-    testCharacter.createTestGameDataElement('モンスターA', 1, testFile.identifier);
+    let back: string = './assets/furuyoni_commons_custom/dust_token_1x1.png';
+    if (!ImageStorage.instance.get(back)) {
+      ImageStorage.instance.add(back);
+    }
 
-    testCharacter = new GameCharacter('testCharacter_2');
-    testCharacter.location.x = 8 * 50;
-    testCharacter.location.y = 8 * 50;
-    testCharacter.initialize();
-    testCharacter.createTestGameDataElement('モンスターB', 1, testFile.identifier);
+    [
+      [67.35842462699682, 58.56010622363139, -30],
+      [110.20132089856467, 101.23563155077989, 120],
+      [75.48151707285314, 114.87436656945778, 195],
+      [104.09138329900426, 63.63576056348791, 45],
+      [51.64156341272045, 90.82623512043367, 255],
+      [151.40249381085385, 35.241976210452336, -45],
+      [188.55626047821818, 31.395165998896623, 30],
+      [144.39940425438778, 70.45586923405614, 240],
+      [173.45656220452955, 89.25954938130877, 180],
+      [200.53315390861826, 65.33192288883616, 105],
+      [234.7758340936388, 245.0006889779995, 195],
+      [268.58469905951756, 231.66848480504186, 120],
+      [264.07618304966485, 196.63721037333198, 45],
+      [471.258955287031, 160.35755693102166, 105],
+      [463.37919991648937, 229.189004254875, 255],
+      [478.3586250893949, 296.8881759921522, 105],
+      [460.37800477726324, 364.9062402285317, 255],
+      [483.37236388792445, 430.51922461941734, 105],
+      [458.42507670080965, 507.18981481147256, 285],
+      [482.35350036065137, 575.0040974601073, 75],
+      [465.86663790227834, 643.8413715534687, -75],
+      [478.41807561486434, 709.466771228802, 75],
+      [469.46047444040846, 777.8049467324925, 285],
+      [673.6084901269184, 707.0788923369998, 300],
+      [706.6164583214771, 694.9060032612889, 15],
+      [676.00974051102, 744.1407445458758, 225],
+      [751.945550223327, 908.7790687161154, 210],
+      [789.8377103936201, 904.7061885087752, 135],
+      [740.3024840076204, 874.2412005275539, 285],
+      [767.4632037348454, 850.7573977946149, 0],
+      [795.5167326834851, 870.0191032091333, 60],
+      [865.4223841546587, 822.7121949162381, 15],
+      [831.6410523008083, 839.4668847524396, 300],
+      [836.9584367316081, 875.8456055282809, 225],
+      [873.488678129302, 880.8137392212213, 150],
+      [890.487723115567, 849.3292323811144, 75],
+    ].forEach(([locationX, locatioonY, rotate]) => {
+      let card = Card.create('桜花結晶', front, back, 1.2);
+      card.location.x = locationX;
+      card.location.y = locatioonY;
+      card.rotate = rotate;
+    });
 
-    testCharacter = new GameCharacter('testCharacter_3');
-    fileContext = ImageFile.createEmpty('testCharacter_3_image').toContext();
-    fileContext.url = './assets/images/mon_128.gif';
-    testFile = ImageStorage.instance.add(fileContext);
-    testCharacter.location.x = 4 * 50;
-    testCharacter.location.y = 2 * 50;
-    testCharacter.initialize();
-    testCharacter.createTestGameDataElement('モンスターC', 3, testFile.identifier);
+    // NOTE: don't create default table objects.
+    // testCharacter = new GameCharacter('testCharacter_1');
+    // fileContext = ImageFile.createEmpty('testCharacter_1_image').toContext();
+    // fileContext.url = './assets/images/mon_052.gif';
+    // testFile = ImageStorage.instance.add(fileContext);
+    // testCharacter.location.x = 5 * 50;
+    // testCharacter.location.y = 9 * 50;
+    // testCharacter.initialize();
+    // testCharacter.createTestGameDataElement('モンスターA', 1, testFile.identifier);
 
-    testCharacter = new GameCharacter('testCharacter_4');
-    fileContext = ImageFile.createEmpty('testCharacter_4_image').toContext();
-    fileContext.url = './assets/images/mon_150.gif';
-    testFile = ImageStorage.instance.add(fileContext);
-    testCharacter.location.x = 6 * 50;
-    testCharacter.location.y = 11 * 50;
-    testCharacter.initialize();
-    testCharacter.createTestGameDataElement('キャラクターA', 1, testFile.identifier);
+    // testCharacter = new GameCharacter('testCharacter_2');
+    // testCharacter.location.x = 8 * 50;
+    // testCharacter.location.y = 8 * 50;
+    // testCharacter.initialize();
+    // testCharacter.createTestGameDataElement('モンスターB', 1, testFile.identifier);
 
-    testCharacter = new GameCharacter('testCharacter_5');
-    fileContext = ImageFile.createEmpty('testCharacter_5_image').toContext();
-    fileContext.url = './assets/images/mon_211.gif';
-    testFile = ImageStorage.instance.add(fileContext);
-    testCharacter.location.x = 12 * 50;
-    testCharacter.location.y = 12 * 50;
-    testCharacter.initialize();
-    testCharacter.createTestGameDataElement('キャラクターB', 1, testFile.identifier);
+    // testCharacter = new GameCharacter('testCharacter_3');
+    // fileContext = ImageFile.createEmpty('testCharacter_3_image').toContext();
+    // fileContext.url = './assets/images/mon_128.gif';
+    // testFile = ImageStorage.instance.add(fileContext);
+    // testCharacter.location.x = 4 * 50;
+    // testCharacter.location.y = 2 * 50;
+    // testCharacter.initialize();
+    // testCharacter.createTestGameDataElement('モンスターC', 3, testFile.identifier);
 
-    testCharacter = new GameCharacter('testCharacter_6');
-    fileContext = ImageFile.createEmpty('testCharacter_6_image').toContext();
-    fileContext.url = './assets/images/mon_135.gif';
-    testFile = ImageStorage.instance.add(fileContext);
-    testCharacter.initialize();
-    testCharacter.location.x = 5 * 50;
-    testCharacter.location.y = 13 * 50;
-    testCharacter.createTestGameDataElement('キャラクターC', 1, testFile.identifier);
+    // testCharacter = new GameCharacter('testCharacter_4');
+    // fileContext = ImageFile.createEmpty('testCharacter_4_image').toContext();
+    // fileContext.url = './assets/images/mon_150.gif';
+    // testFile = ImageStorage.instance.add(fileContext);
+    // testCharacter.location.x = 6 * 50;
+    // testCharacter.location.y = 11 * 50;
+    // testCharacter.initialize();
+    // testCharacter.createTestGameDataElement('キャラクターA', 1, testFile.identifier);
+
+    // testCharacter = new GameCharacter('testCharacter_5');
+    // fileContext = ImageFile.createEmpty('testCharacter_5_image').toContext();
+    // fileContext.url = './assets/images/mon_211.gif';
+    // testFile = ImageStorage.instance.add(fileContext);
+    // testCharacter.location.x = 12 * 50;
+    // testCharacter.location.y = 12 * 50;
+    // testCharacter.initialize();
+    // testCharacter.createTestGameDataElement('キャラクターB', 1, testFile.identifier);
+
+    // testCharacter = new GameCharacter('testCharacter_6');
+    // fileContext = ImageFile.createEmpty('testCharacter_6_image').toContext();
+    // fileContext.url = './assets/images/mon_135.gif';
+    // testFile = ImageStorage.instance.add(fileContext);
+    // testCharacter.initialize();
+    // testCharacter.location.x = 5 * 50;
+    // testCharacter.location.y = 13 * 50;
+    // testCharacter.createTestGameDataElement('キャラクターC', 1, testFile.identifier);
   }
 
   getContextMenuActionsForCreateObject(position: PointerCoordinate): ContextMenuAction[] {

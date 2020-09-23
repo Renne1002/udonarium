@@ -108,8 +108,7 @@ export class GameTableComponent implements OnInit, OnDestroy, AfterViewInit {
         this.gridCanvas.nativeElement.style.opacity = opacity + '';
       });
     this.tabletopService.makeDefaultTable();
-    // NOTE: don't create default table objects.
-    // this.tabletopService.makeDefaultTabletopObjects();
+    this.tabletopService.makeDefaultTabletopObjects();
   }
 
   ngAfterViewInit() {
