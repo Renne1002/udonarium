@@ -65,11 +65,11 @@ export class GameTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private viewPotisonX: number = 100;
   private viewPotisonY: number = 0;
-  private viewPotisonZ: number = 0;
+  private viewPotisonZ: number = -500;
 
-  private viewRotateX: number = 50;
+  private viewRotateX: number = 0;
   private viewRotateY: number = 0;
-  private viewRotateZ: number = 10;
+  private viewRotateZ: number = 0;
 
   private buttonCode: number = 0;
   private input: InputHandler = null;
