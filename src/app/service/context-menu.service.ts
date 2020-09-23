@@ -61,7 +61,23 @@ export class ContextMenuService {
 
     childPanelService.panelComponentRef = panelComponentRef;
     if (actions) {
-      childPanelService.actions = actions;
+      let filteredActions = actions.filter(action => action.enabled != false);
+      if (filteredActions.length && filteredActions[0].type == ContextMenuType.SEPARATOR) {
+        filteredActions.shift();
+      }
+      let formattedActions = [];
+      for (let i = 0, len = filteredActions.length; i < len -1; i++) {
+        if (
+          filteredActions[i].type != ContextMenuType.SEPARATOR ||
+          filteredActions[i + 1].type != ContextMenuType.SEPARATOR
+        ) {
+          formattedActions.push(filteredActions[i]);
+        }
+      }
+      if (filteredActions.length && filteredActions[filteredActions.length - 1].type != ContextMenuType.SEPARATOR) {
+        formattedActions.push(filteredActions[filteredActions.length - 1]);
+      }
+      childPanelService.actions = formattedActions;
     }
     if (position) {
       childPanelService.position.x = position.x;

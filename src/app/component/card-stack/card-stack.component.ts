@@ -227,45 +227,69 @@ export class CardStackComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (!this.pointerDeviceService.isAllowedToOpenContextMenu) return;
     let position = this.pointerDeviceService.pointers[0];
-    let menu = [
+    let isHolder = this.cardStack.holder == PeerCursor.myCursor.peerId;
+
+    this.contextMenuService.open(position, [
+      {
+        name: 'デッキの所有権を放棄する', action: () => {
+          this.cardStack.unhold();
+          SoundEffect.play(PresetSound.cardPut);
+        },
+        enabled: isHolder
+      },
+      ContextMenuSeparator,
+      {
+        name: 'デッキの所持者になる', action: () => {
+          this.cardStack.hold(PeerCursor.myCursor.peerId);
+          SoundEffect.play(PresetSound.cardDraw);
+        },
+        enabled: !this.cardStack.hasHolder
+      },
+      ContextMenuSeparator,
       {
         name: '１枚引く', action: () => {
           if (this.drawCard() != null) {
             SoundEffect.play(PresetSound.cardDraw);
           }
-        }
+        },
+        enabled: isHolder
       },
       ContextMenuSeparator,
       {
         name: '一番上を表にする', action: () => {
           this.cardStack.faceUp();
           SoundEffect.play(PresetSound.cardDraw);
-        }
+        },
+        enabled: isHolder
       },
       {
         name: '一番上を裏にする', action: () => {
           this.cardStack.faceDown();
           SoundEffect.play(PresetSound.cardDraw);
-        }
+        },
+        enabled: isHolder
       },
       ContextMenuSeparator,
       {
         name: 'すべて表にする', action: () => {
           this.cardStack.faceUpAll();
           SoundEffect.play(PresetSound.cardDraw);
-        }
+        },
+        enabled: isHolder
       },
       {
         name: 'すべて裏にする', action: () => {
           this.cardStack.faceDownAll();
           SoundEffect.play(PresetSound.cardDraw);
-        }
+        },
+        enabled: isHolder
       },
       {
         name: 'すべて正位置にする', action: () => {
           this.cardStack.uprightAll();
           SoundEffect.play(PresetSound.cardDraw);
-        }
+        },
+        enabled: isHolder
       },
       ContextMenuSeparator,
       {
@@ -273,30 +297,38 @@ export class CardStackComponent implements OnInit, AfterViewInit, OnDestroy {
           this.cardStack.shuffle();
           SoundEffect.play(PresetSound.cardShuffle);
           EventSystem.call('SHUFFLE_CARD_STACK', { identifier: this.cardStack.identifier });
-        }
+        },
+        enabled: isHolder
       },
-      { name: 'カード一覧', action: () => { this.showStackList(this.cardStack); } },
+      {
+        name: 'カード一覧', action: () => {
+          this.showStackList(this.cardStack);
+        },
+        enabled: isHolder
+      },
       ContextMenuSeparator,
       (this.isShowTotal
-        ? { name: '枚数を非表示にする', action: () => { this.cardStack.isShowTotal = false; } }
-        : { name: '枚数を表示する', action: () => { this.cardStack.isShowTotal = true; } }
+        ? { name: '枚数を非表示にする', action: () => { this.cardStack.isShowTotal = false; }, enabled: isHolder }
+        : { name: '枚数を表示する', action: () => { this.cardStack.isShowTotal = true; }, enabled: isHolder }
       ),
-      { name: 'カードサイズを揃える', action: () => { if (this.cardStack.topCard) this.cardStack.unifyCardsSize(this.cardStack.topCard.size); } },
+      { name: 'カードサイズを揃える', action: () => { if (this.cardStack.topCard) this.cardStack.unifyCardsSize(this.cardStack.topCard.size); }, enabled: isHolder },
       ContextMenuSeparator,
       {
         name: '山札を人数分に分割する', action: () => {
           this.splitStack(Network.peerIds.length);
           SoundEffect.play(PresetSound.cardDraw);
-        }
+        },
+        enabled: isHolder
       },
       {
         name: '山札を崩す', action: () => {
           this.breakStack();
           SoundEffect.play(PresetSound.cardShuffle);
-        }
+        },
+        enabled: isHolder
       },
       ContextMenuSeparator,
-      { name: '詳細を表示', action: () => { this.showDetail(this.cardStack); } },
+      { name: '詳細を表示', action: () => { this.showDetail(this.cardStack); }, enabled: isHolder },
       {
         name: 'コピーを作る', action: () => {
           let cloneObject = this.cardStack.clone();
@@ -305,39 +337,18 @@ export class CardStackComponent implements OnInit, AfterViewInit, OnDestroy {
           cloneObject.owner = '';
           cloneObject.toTopmost();
           SoundEffect.play(PresetSound.cardPut);
-        }
+        },
+        enabled: isHolder
       },
       {
         name: '山札を削除する', action: () => {
           this.cardStack.setLocation('graveyard');
           this.cardStack.destroy();
           SoundEffect.play(PresetSound.sweep);
-        }
+        },
+        enabled: isHolder
       },
-    ]
-    if (this.cardStack.hasHolder) {
-      menu.unshift(
-        {
-          name: 'デッキの所有権を放棄する', action: () => {
-            this.cardStack.unhold();
-            SoundEffect.play(PresetSound.cardPut);
-          }
-        },
-        ContextMenuSeparator
-      )
-    } else {
-      menu.unshift(
-        {
-          name: 'デッキの所持者になる', action: () => {
-            this.cardStack.hold(PeerCursor.myCursor.peerId);
-            SoundEffect.play(PresetSound.cardDraw);
-          }
-        },
-        ContextMenuSeparator
-      );
-    }
-
-    this.contextMenuService.open(position, menu, this.name);
+    ], this.name);
   }
 
   onMove() {
