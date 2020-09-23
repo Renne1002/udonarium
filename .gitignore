@@ -47,3 +47,7 @@ Thumbs.db
 
 # Config
 src/assets/config.yaml
+
+# Assets
+src/assets/furuyoni_commons_na/*
+!src/assets/furuyoni_commons_na/.keep
