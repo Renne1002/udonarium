@@ -257,6 +257,16 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
     this.ngZone.run(() => this.dispatchCardDropEvent());
   }
 
+  @HostListener('document:keydown', ['$event'])
+  onKeydown(e: KeyboardEvent) {
+    if (document.body !== document.activeElement) return;
+
+    switch (e.key) {
+      case 't': this.rotate = 90; break;
+      case 'u': this.rotate = 0; break;
+    }
+  }
+
   private createStack() {
     let cardStack = CardStack.create('山札');
     cardStack.location.x = this.card.location.x;
