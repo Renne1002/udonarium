@@ -51,3 +51,5 @@ src/assets/config.yaml
 # Assets
 src/assets/furuyoni_commons_na/*
 !src/assets/furuyoni_commons_na/.keep
+src/assets/furuyoni_commons_custom/*
+!src/assets/furuyoni_commons_custom/.keep
