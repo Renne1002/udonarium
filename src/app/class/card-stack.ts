@@ -13,6 +13,7 @@ export class CardStack extends TabletopObject {
   @SyncVar() rotate: number = 0;
   @SyncVar() zindex: number = 0;
   @SyncVar() owner: string = '';
+  @SyncVar() holder: string = '';
   @SyncVar() isShowTotal: boolean = true;
 
   get name(): string { return this.getCommonValue('name', ''); }
@@ -20,7 +21,12 @@ export class CardStack extends TabletopObject {
     let object = PeerCursor.find(this.owner);
     return object ? object.name : '';
   }
+  get holderName(): string {
+    let object = PeerCursor.find(this.holder);
+    return object ? object.name : '';
+  }
   get hasOwner(): boolean { return PeerCursor.find(this.owner) != null; }
+  get hasHolder(): boolean { return PeerCursor.find(this.holder) != null; }
 
   private get cardRoot(): ObjectNode {
     for (let node of this.children) {
@@ -147,6 +153,17 @@ export class CardStack extends TabletopObject {
     super.setLocation(location);
     let cards = this.cards;
     for (let card of cards) card.setLocation(location);
+  }
+
+  hold(holder: string) {
+    this.holder = holder;
+    for (let card of this.cards) {
+      card.holder = holder;
+    }
+  }
+
+  unhold() {
+    this.hold('');
   }
 
   private setSamePositionFor(card: Card) {

@@ -65,7 +65,9 @@ export class CardStackComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   get hasOwner(): boolean { return this.cardStack.hasOwner; }
+  get hasHolder(): boolean { return this.cardStack.hasHolder; }
   get ownerName(): string { return this.cardStack.ownerName; }
+  get holderName(): string { return this.cardStack.holderName; }
 
   get topCard(): Card { return this.cardStack.topCard; }
   get imageFile(): ImageFile { return this.cardStack.imageFile; }
@@ -225,7 +227,7 @@ export class CardStackComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (!this.pointerDeviceService.isAllowedToOpenContextMenu) return;
     let position = this.pointerDeviceService.pointers[0];
-    this.contextMenuService.open(position, [
+    let menu = [
       {
         name: '１枚引く', action: () => {
           if (this.drawCard() != null) {
@@ -312,7 +314,30 @@ export class CardStackComponent implements OnInit, AfterViewInit, OnDestroy {
           SoundEffect.play(PresetSound.sweep);
         }
       },
-    ], this.name);
+    ]
+    if (this.cardStack.hasHolder) {
+      menu.unshift(
+        {
+          name: 'デッキの所有権を放棄する', action: () => {
+            this.cardStack.unhold();
+            SoundEffect.play(PresetSound.cardPut);
+          }
+        },
+        ContextMenuSeparator
+      )
+    } else {
+      menu.unshift(
+        {
+          name: 'デッキの所持者になる', action: () => {
+            this.cardStack.hold(PeerCursor.myCursor.peerId);
+            SoundEffect.play(PresetSound.cardDraw);
+          }
+        },
+        ContextMenuSeparator
+      );
+    }
+
+    this.contextMenuService.open(position, menu, this.name);
   }
 
   onMove() {

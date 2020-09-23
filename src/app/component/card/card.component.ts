@@ -44,6 +44,8 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
   set rotate(rotate: number) { this.card.rotate = rotate; }
   get owner(): string { return this.card.owner; }
   set owner(owner: string) { this.card.owner = owner; }
+  get holder(): string { return this.card.holder; }
+  set holder(holder: string) { this.card.holder = holder; }
   get zindex(): number { return this.card.zindex; }
   get size(): number { return this.adjustMinBounds(this.card.size); }
 
@@ -51,7 +53,9 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
   get isFront(): boolean { return this.card.isFront; }
   get isVisible(): boolean { return this.card.isVisible; }
   get hasOwner(): boolean { return this.card.hasOwner; }
+  get hasHolder(): boolean { return this.card.hasHolder; }
   get ownerName(): string { return this.card.ownerName; }
+  get holderName(): string { return this.card.holderName; }
 
   get imageFile(): ImageFile { return this.card.imageFile; }
   get frontImage(): ImageFile { return this.card.frontImage; }

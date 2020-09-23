@@ -16,6 +16,7 @@ export class Card extends TabletopObject {
   @SyncVar() state: CardState = CardState.FRONT;
   @SyncVar() rotate: number = 0;
   @SyncVar() owner: string = '';
+  @SyncVar() holder: string = '';
   @SyncVar() zindex: number = 0;
 
   get name(): string { return this.getCommonValue('name', ''); }
@@ -30,8 +31,13 @@ export class Card extends TabletopObject {
     let object = PeerCursor.find(this.owner);
     return object ? object.name : '';
   }
+  get holderName(): string {
+    let object = PeerCursor.find(this.holder);
+    return object ? object.name : '';
+  }
 
   get hasOwner(): boolean { return PeerCursor.find(this.owner) != null; }
+  get hasHolder(): boolean { return PeerCursor.find(this.holder) != null; }
   get isHand(): boolean { return Network.peerId === this.owner; }
   get isFront(): boolean { return this.state === CardState.FRONT; }
   get isVisible(): boolean { return this.isHand || this.isFront; }
