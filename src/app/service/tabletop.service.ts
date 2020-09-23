@@ -326,17 +326,17 @@ export class TabletopService {
     let gameTable = new GameTable('gameTable');
     let testBgFile: ImageFile = null;
     let bgFileContext = ImageFile.createEmpty('testTableBackgroundImage_image').toContext();
-    bgFileContext.url = './assets/images/BG10a_80.jpg';
+    bgFileContext.url = './assets/furuyoni_commons_na/furuyoni_na/board_token/board.png';
     testBgFile = ImageStorage.instance.add(bgFileContext);
     //let testDistanceFile: ImageFile = null;
     //let distanceFileContext = ImageFile.createEmpty('testTableDistanceviewImage_image').toContext();
     //distanceFileContext.url = './assets/images/BG00a1_80.jpg';
     //testDistanceFile = ImageStorage.instance.add(distanceFileContext);
-    gameTable.name = '最初のテーブル';
+    gameTable.name = 'ボード';
     gameTable.imageIdentifier = testBgFile.identifier;
     //gameTable.backgroundImageIdentifier = testDistanceFile.identifier;
     gameTable.width = 20;
-    gameTable.height = 15;
+    gameTable.height = 20;
     gameTable.initialize();
 
     tableSelecter.viewTableIdentifier = gameTable.identifier;
