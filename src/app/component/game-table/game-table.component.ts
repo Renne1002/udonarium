@@ -255,6 +255,13 @@ export class GameTableComponent implements OnInit, OnDestroy, AfterViewInit {
     let rotateY = 0;
     let rotateZ = 0;
 
+    if (e.key == '1') {
+      this.viewRotateZ = 0;
+    }
+    if (e.key == '2') {
+      this.viewRotateZ = 180;
+    }
+
     if (e.keyCode === 37) {//←
       if (e.shiftKey) {
         rotateZ = -2;
