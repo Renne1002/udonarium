@@ -69,6 +69,7 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
   movableOption: MovableOption = {};
   rotableOption: RotableOption = {};
 
+  private hovered: boolean = false;
   private doubleClickTimer: NodeJS.Timer = null;
   private doubleClickPoint = { x: 0, y: 0 };
 
@@ -117,6 +118,9 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
   ngAfterViewInit() {
     this.input = new InputHandler(this.elementRef.nativeElement);
     this.input.onStart = this.onInputStart.bind(this);
+    const el = this.elementRef.nativeElement;
+    el.addEventListener('mouseenter', () => (this.hovered = true));
+    el.addEventListener('mouseleave', () => (this.hovered = false));
   }
 
   ngOnDestroy() {
@@ -170,6 +174,7 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
     let distance = (this.doubleClickPoint.x - this.input.pointer.x) ** 2 + (this.doubleClickPoint.y - this.input.pointer.y) ** 2;
     if (distance < 10 ** 2) {
       console.log('onDoubleClick !!!!');
+      if (this.hasHolder && this.holder != PeerCursor.myCursor.peerId) return;
       if (this.hasOwner && !this.isHand) return;
       this.state = this.isVisible && !this.isHand ? CardState.BACK : CardState.FRONT;
       this.owner = '';
@@ -194,6 +199,7 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
     e.stopPropagation();
     e.preventDefault();
     if (!this.pointerDeviceService.isAllowedToOpenContextMenu) return;
+    if (this.hasHolder && this.holder != PeerCursor.myCursor.peerId) return;
     let position = this.pointerDeviceService.pointers[0];
     this.contextMenuService.open(position, [
       (!this.isVisible || this.isHand
@@ -264,6 +270,7 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
   @HostListener('document:keydown', ['$event'])
   onKeydown(e: KeyboardEvent) {
     if (document.body !== document.activeElement) return;
+    if (!this.hovered) return;
 
     switch (e.key) {
       case 't': this.rotate = 90; break;
