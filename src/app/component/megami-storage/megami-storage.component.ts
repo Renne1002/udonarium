@@ -700,6 +700,26 @@ const FURUYONI_COMPONENTS = {
       size: 3.2
     },
   ],
+  'シンラ (A1)': [
+    {
+      name: '計略トークン',
+      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_blue.png',
+      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_back.png',
+      size: 1.5
+    },
+    {
+      name: '計略トークン',
+      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_red.png',
+      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_back.png',
+      size: 1.5
+    },
+    {
+      name: '計略ボード',
+      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_board.png',
+      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_board.png',
+      size: 3.2
+    },
+  ],
   'サリヤ': [
     {
       name: 'マシンボード',
@@ -720,7 +740,47 @@ const FURUYONI_COMPONENTS = {
       size: 1.2
     },
   ],
+  'サリヤ (A1)': [
+    {
+      name: 'マシンボード',
+      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/machine_board.png',
+      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/machine_board.png',
+      size: 4.4
+    },
+    {
+      name: '造花結晶 (1P)',
+      front: './assets/furuyoni_commons_custom/machine_token_1x1.png',
+      back: './assets/furuyoni_commons_custom/machine_token_1x1.png',
+      size: 1.2
+    },
+    {
+      name: '造花結晶 (2P)',
+      front: './assets/furuyoni_commons_custom/machine_token_2_1x1.png',
+      back: './assets/furuyoni_commons_custom/machine_token_2_1x1.png',
+      size: 1.2
+    },
+  ],
   'ライラ': [
+    {
+      name: '風雷ボード',
+      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/furai_board.png',
+      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/furai_board.png',
+      size: 5.8
+    },
+    {
+      name: '風神トークン',
+      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/fujin_0x.png',
+      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/fujin_1x.png',
+      size: 1.5
+    },
+    {
+      name: '雷神トークン',
+      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/raijin_0x.png',
+      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/raijin_1x.png',
+      size: 1.5
+    },
+  ],
+  'ライラ (A1)': [
     {
       name: '風雷ボード',
       front: './assets/furuyoni_commons_na/furuyoni_na/board_token/furai_board.png',
