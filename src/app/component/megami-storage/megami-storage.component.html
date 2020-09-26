@@ -1,5 +1,6 @@
 <div id="megami-list">
   <span *ngFor="let tarot of talotImages" class="image">
-    <img [src]="tarot.image.url" [alt]="tarot.name" height="160" (click)="createTarot(tarot)">
+    <img [src]="tarot.image.url" [alt]="tarot.name" height="160" (dblclick)="createTarot(tarot)"
+      (contextmenu)="showTarotContextMenu(tarot, $event)">
   </span>
 </div>
