@@ -27,6 +27,7 @@ import { GameTableSettingComponent } from 'component/game-table-setting/game-tab
 import { GameTableComponent } from 'component/game-table/game-table.component';
 import { JukeboxComponent } from 'component/jukebox/jukebox.component';
 import { LobbyComponent } from 'component/lobby/lobby.component';
+import { MegamiStorageComponent } from 'component/megami-storage/megami-storage.component';
 import { ModalComponent } from 'component/modal/modal.component';
 import { NetworkIndicatorComponent } from 'component/network-indicator/network-indicator.component';
 import { OverviewPanelComponent } from 'component/overview-panel/overview-panel.component';
@@ -81,6 +82,7 @@ import { AppComponent } from './app.component';
     GameTableComponent,
     JukeboxComponent,
     LobbyComponent,
+    MegamiStorageComponent,
     ModalComponent,
     OverviewPanelComponent,
     PasswordCheckComponent,

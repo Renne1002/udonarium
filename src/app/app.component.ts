@@ -22,6 +22,7 @@ import { PresetSound, SoundEffect } from '@udonarium/sound-effect';
 import { ChatWindowComponent } from 'component/chat-window/chat-window.component';
 import { ContextMenuComponent } from 'component/context-menu/context-menu.component';
 import { FileStorageComponent } from 'component/file-storage/file-storage.component';
+import { MegamiStorageComponent } from 'component/megami-storage/megami-storage.component';
 import { GameCharacterGeneratorComponent } from 'component/game-character-generator/game-character-generator.component';
 import { GameCharacterSheetComponent } from 'component/game-character-sheet/game-character-sheet.component';
 import { GameObjectInventoryComponent } from 'component/game-object-inventory/game-object-inventory.component';
@@ -200,6 +201,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         break;
       case 'FileStorageComponent':
         component = FileStorageComponent;
+        break;
+      case 'MegamiStorageComponent':
+        component = MegamiStorageComponent;
         break;
       case 'GameCharacterSheetComponent':
         component = GameCharacterSheetComponent;
