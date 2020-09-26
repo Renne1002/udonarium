@@ -53,3 +53,6 @@ PRのコードが完全ではない場合でも作業中PRとして送ること�
 
 ## License
 [MIT License](https://github.com/Renne1002/udonarium/blob/master/LICENSE)
+
+ふるよにコモンズ/BakaFire,TOKIAME
+https://main-bakafire.ssl-lolipop.jp/furuyoni/na/rule.html
