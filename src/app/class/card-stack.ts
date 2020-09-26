@@ -77,6 +77,8 @@ export class CardStack extends TabletopObject {
   }
 
   drawCard(): Card {
+    if (this.holder && this.holder != PeerCursor.myCursor.peerId) return null;
+
     let card = this.topCard ? <Card>this.cardRoot.removeChild(this.topCard) : null;
     if (card) {
       card.rotate += this.rotate;
@@ -91,6 +93,8 @@ export class CardStack extends TabletopObject {
   }
 
   drawCardAll(): Card[] {
+    if (this.holder && this.holder != PeerCursor.myCursor.peerId) return;
+
     let cards = this.cards;
     for (let card of cards) {
       this.cardRoot.removeChild(card);
@@ -147,6 +151,7 @@ export class CardStack extends TabletopObject {
 
   putOnTop(card: Card): Card {
     if (!this.cardRoot) return null;
+    if (this.holder && this.holder != PeerCursor.myCursor.peerId) return null;
     if (!this.topCard) return this.putOnBottom(card);
     card.owner = '';
     card.zindex = 0;
@@ -160,6 +165,7 @@ export class CardStack extends TabletopObject {
 
   putOnBottom(card: Card): Card {
     if (!this.cardRoot) return null;
+    if (this.holder && this.holder != PeerCursor.myCursor.peerId) return null;
     card.owner = '';
     card.zindex = 0;
     card.state = CardState.BACK;
