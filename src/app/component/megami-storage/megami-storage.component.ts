@@ -840,7 +840,7 @@ export class MegamiStorageComponent implements OnInit, OnDestroy, AfterViewInit 
 
   createTarot(tarot: Tarot) {
     let card = Card.create(tarot.name, tarot.image.url, this.tarotBack.url, 2);
-    card.uplight();
+    card.upright();
     SoundEffect.play(PresetSound.cardDraw);
   }
 

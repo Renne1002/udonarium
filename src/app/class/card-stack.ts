@@ -1,4 +1,4 @@
-import { Card } from './card';
+import { Card, CardState } from './card';
 import { ImageFile } from './core/file-storage/image-file';
 import { SyncObject, SyncVar } from './core/synchronize-object/decorator';
 import { ObjectNode } from './core/synchronize-object/object-node';
@@ -47,12 +47,30 @@ export class CardStack extends TabletopObject {
     }
   }
 
+  upright() {
+    const el: HTMLElement = document.querySelector('game-table > .component > .component-content');
+    const transform = el.style.transform;
+    const matches = transform.match(/rotateZ\((-?\d+)deg\)/);
+    let rotate = 0;
+    if (matches) {
+      const rotateZ = (Number(matches[1]) % 360 + 360) % 360;
+      if (90 < rotateZ && rotateZ <= 270) {
+        rotate = 180;
+      }
+    }
+    this.rotate = rotate;
+    for (let card of this.cards) {
+      card.rotate = 0;
+    }
+  }
+
   shuffle(): Card[] {
     if (!this.cardRoot) return;
+    this.upright();
     let length = this.cardRoot.children.length;
     for (let card of this.cards) {
       card.index = Math.random() * length;
-      card.rotate = Math.floor(Math.random() * 2) * 180;
+      card.state = CardState.BACK;
       this.setSamePositionFor(card);
     }
     return this.cards;
@@ -65,6 +83,9 @@ export class CardStack extends TabletopObject {
       if (360 < card.rotate) card.rotate -= 360;
       this.setSamePositionFor(card);
       card.toTopmost();
+      if (card.state == CardState.BACK) {
+        card.owner = PeerCursor.myCursor.peerId;
+      }
     }
     return card;
   }
@@ -76,6 +97,9 @@ export class CardStack extends TabletopObject {
       card.rotate += this.rotate;
       this.setSamePositionFor(card);
       if (360 < card.rotate) card.rotate -= 360;
+      if (card.state == CardState.BACK) {
+        card.owner = PeerCursor.myCursor.peerId;
+      }
     }
     return cards;
   }
@@ -109,8 +133,8 @@ export class CardStack extends TabletopObject {
   }
 
   uprightAll() {
+    this.upright();
     for (let card of this.cards) {
-      card.uplight();
       this.setSamePositionFor(card);
     }
   }

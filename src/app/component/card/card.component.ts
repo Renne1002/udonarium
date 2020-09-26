@@ -284,7 +284,7 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
     cardStack.location.y = this.card.location.y;
     cardStack.posZ = this.card.posZ;
     cardStack.location.name = this.card.location.name;
-    cardStack.rotate = this.rotate;
+    cardStack.upright();
     cardStack.zindex = this.card.zindex;
 
     let cards: Card[] = this.tabletopService.cards.filter(card => {
