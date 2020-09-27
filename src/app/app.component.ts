@@ -204,6 +204,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
         break;
       case 'MegamiStorageComponent':
         component = MegamiStorageComponent;
+        option.height = 524;
+        option.width = 1000;
         break;
       case 'GameCharacterSheetComponent':
         component = GameCharacterSheetComponent;
