@@ -230,6 +230,7 @@ export class CardStackComponent implements OnInit, AfterViewInit, OnDestroy {
     if (!this.hovered) return;
 
     switch (e.key) {
+      case 'r': this.rotate += 180; break;
       case 't': this.cardStack.upright(); this.rotate += 90; break;
       case 'u': this.cardStack.upright(); break;
     }
