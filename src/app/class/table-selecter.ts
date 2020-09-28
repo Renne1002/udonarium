@@ -8,7 +8,7 @@ import { GameTable } from './game-table';
 export class TableSelecter extends GameObject {
   @SyncVar() viewTableIdentifier: string = '';
   gridShow: boolean = false; // true=常時グリッド表示
-  gridSnap: boolean = true;
+  gridSnap: boolean = false; // true=スナップする
 
   // GameObject Lifecycle
   onStoreAdded() {
