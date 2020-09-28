@@ -5,6 +5,7 @@ import { AudioPlayer } from '@udonarium/core/file-storage/audio-player';
 import { AudioSharingSystem } from '@udonarium/core/file-storage/audio-sharing-system';
 import { AudioStorage } from '@udonarium/core/file-storage/audio-storage';
 import { FileArchiver } from '@udonarium/core/file-storage/file-archiver';
+import { GameObject } from '@udonarium/core/synchronize-object/game-object'
 import { ImageFile } from '@udonarium/core/file-storage/image-file';
 import { ImageSharingSystem } from '@udonarium/core/file-storage/image-sharing-system';
 import { ImageStorage } from '@udonarium/core/file-storage/image-storage';
@@ -18,6 +19,7 @@ import { DiceBot } from '@udonarium/dice-bot';
 import { Jukebox } from '@udonarium/Jukebox';
 import { PeerCursor } from '@udonarium/peer-cursor';
 import { PresetSound, SoundEffect } from '@udonarium/sound-effect';
+import { Card } from '@udonarium/card'
 
 import { ChatWindowComponent } from 'component/chat-window/chat-window.component';
 import { ContextMenuComponent } from 'component/context-menu/context-menu.component';
@@ -39,6 +41,9 @@ import { ModalService } from 'service/modal.service';
 import { PanelOption, PanelService } from 'service/panel.service';
 import { PointerDeviceService } from 'service/pointer-device.service';
 import { SaveDataService } from 'service/save-data.service';
+import { GameObjectInventoryService } from 'service/game-object-inventory.service'
+import { TabletopService } from 'service/tabletop.service';
+import { fromEventPattern } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -59,6 +64,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     private chatMessageService: ChatMessageService,
     private appConfigService: AppConfigService,
     private saveDataService: SaveDataService,
+    private tabletopService: TabletopService,
+    private gameObjectInventoryService: GameObjectInventoryService,
     private ngZone: NgZone
   ) {
 
@@ -227,6 +234,17 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       this.openPanelCount = this.openPanelCount + 1;
       this.panelService.open(component, option);
     }
+  }
+
+  resetGameObjects() {
+    if (!window.confirm('盤面状の全てのカードを削除します。よろしいですか？')) return;
+
+    for (let object of ObjectStore.instance.getObjects()) {
+      if (object instanceof Card) {
+        ObjectStore.instance.delete(object);
+      }
+    }
+    this.tabletopService.putInitialSakuraTokens();
   }
 
   save() {

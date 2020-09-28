@@ -29,6 +29,8 @@ type LocationName = string;
 export class TabletopService {
   dragAreaElement: HTMLElement = document.body;
 
+  static initialized = false;
+
   private batchTask: Map<any, Function> = new Map();
   private batchTaskTimer: NodeJS.Timer = null;
 
@@ -342,7 +344,7 @@ export class TabletopService {
     tableSelecter.viewTableIdentifier = gameTable.identifier;
   }
 
-  makeDefaultTabletopObjects() {
+  putInitialSakuraTokens() {
     let front: string = './assets/furuyoni_commons_custom/sakura_token_2_1x1.png';
     if (!ImageStorage.instance.get(front)) {
       ImageStorage.instance.add(front);
@@ -396,7 +398,9 @@ export class TabletopService {
       card.location.y = locatioonY;
       card.rotate = rotate;
     });
+  }
 
+  makeDefaultTabletopObjects() {
     // NOTE: don't create default table objects.
     // testCharacter = new GameCharacter('testCharacter_1');
     // fileContext = ImageFile.createEmpty('testCharacter_1_image').toContext();
