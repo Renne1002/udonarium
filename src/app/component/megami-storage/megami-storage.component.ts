@@ -1007,7 +1007,7 @@ export class MegamiStorageComponent implements OnInit, OnDestroy, AfterViewInit 
     const tarotBack = './assets/furuyoni_commons_na/furuyoni_na/tarots/tarotback.png';
     if (!this.fileStorageService.get(tarotBack)) {
       this.fileStorageService.add(tarotBack);
-      this.tarotBack = this.fileStorageService.get(tarotBack);
     }
+    this.tarotBack = this.fileStorageService.get(tarotBack);
   }
 }
