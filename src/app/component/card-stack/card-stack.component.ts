@@ -82,6 +82,7 @@ export class CardStackComponent implements OnInit, AfterViewInit, OnDestroy {
   movableOption: MovableOption = {};
   rotableOption: RotableOption = {};
 
+  private hovered: boolean = false;
   private doubleClickTimer: NodeJS.Timer = null;
   private doubleClickPoint = { x: 0, y: 0 };
 
@@ -138,6 +139,9 @@ export class CardStackComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit() {
     this.input = new InputHandler(this.elementRef.nativeElement);
     this.input.onStart = this.onInputStart.bind(this);
+    const el = this.elementRef.nativeElement;
+    el.addEventListener('mouseenter', () => (this.hovered = true));
+    el.addEventListener('mouseleave', () => (this.hovered = false));
   }
 
   ngOnDestroy() {
@@ -218,6 +222,17 @@ export class CardStackComponent implements OnInit, AfterViewInit, OnDestroy {
     if (e instanceof MouseEvent) this.startIconHiddenTimer();
 
     EventSystem.trigger('SELECT_TABLETOP_OBJECT', { identifier: this.cardStack.identifier, className: 'GameCharacter' });
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  onKeydown(e: KeyboardEvent) {
+    if (document.body !== document.activeElement) return;
+    if (!this.hovered) return;
+
+    switch (e.key) {
+      case 't': this.cardStack.upright(); this.rotate += 90; break;
+      case 'u': this.cardStack.upright(); break;
+    }
   }
 
   @HostListener('contextmenu', ['$event'])
