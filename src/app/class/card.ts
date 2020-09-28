@@ -55,7 +55,7 @@ export class Card extends TabletopObject {
   upright() {
     const el: HTMLElement = document.querySelector('game-table > .component > .component-content');
     const transform = el.style.transform;
-    const matches = transform.match(/rotateZ\((-?\d+)deg\)/);
+    const matches = transform.match(/rotateZ\((-?\d+)/);
     let rotate = 0;
     if (matches) {
       const rotateZ = (Number(matches[1]) % 360 + 360) % 360;
