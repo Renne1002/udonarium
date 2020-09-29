@@ -25,6 +25,111 @@ import { PointerCoordinate, PointerDeviceService } from './pointer-device.servic
 type ObjectIdentifier = string;
 type LocationName = string;
 
+const FURUYONI_COMPONENTS = [
+  {
+    name: '集中力カード',
+    front: './assets/furuyoni_commons_na/furuyoni_na/cards/vigor.png',
+    back: './assets/furuyoni_commons_na/furuyoni_na/cards/vigor_b.png',
+    size: 3
+  },
+  {
+    name: '畏縮トークン',
+    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/shrink.png',
+    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/shrink2.png',
+    size: 1.5
+  },
+  {
+    name: '計略トークン(神算)',
+    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_blue.png',
+    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_back.png',
+    size: 1.5
+  },
+  {
+    name: '計略トークン(鬼謀)',
+    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_red.png',
+    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_back.png',
+    size: 1.5
+  },
+  {
+    name: '計略ボード',
+    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_board.png',
+    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_board.png',
+    size: 3.2
+  },
+  {
+    name: 'マシンボード',
+    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/machine_board.png',
+    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/machine_board.png',
+    size: 4.4
+  },
+  {
+    name: '造花結晶 (1P)',
+    front: './assets/furuyoni_commons_custom/machine_token_1x1.png',
+    back: './assets/furuyoni_commons_custom/machine_token_1x1.png',
+    size: 1.2
+  },
+  {
+    name: '造花結晶 (2P)',
+    front: './assets/furuyoni_commons_custom/machine_token_2_1x1.png',
+    back: './assets/furuyoni_commons_custom/machine_token_2_1x1.png',
+    size: 1.2
+  },
+  {
+    name: '風雷ボード',
+    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/furai_board.png',
+    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/furai_board.png',
+    size: 5.8
+  },
+  {
+    name: '風神トークン',
+    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/fujin_0x.png',
+    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/fujin_1x.png',
+    size: 1.5
+  },
+  {
+    name: '雷神トークン',
+    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/raijin_0x.png',
+    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/raijin_1x.png',
+    size: 1.5
+  },
+  {
+    name: '凍結トークン',
+    front: './assets/furuyoni_commons_custom/frozen_token_1x1.png',
+    back: './assets/furuyoni_commons_custom/frozen_token_1x1.png',
+    size: 1.2,
+  },
+  {
+    name: '兵舎ボード',
+    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/barrack_board.png',
+    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/barrack_board.png',
+    size: 5.8
+  },
+  {
+    name: '土壌ボード',
+    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/soil_board.png',
+    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/soil_board.png',
+    size: 4.4
+  },
+  {
+    name: '種結晶',
+    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/seed_token.png',
+    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/seed_token.png',
+    size: 0.7
+  },
+  {
+    name: '構想ボード',
+    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/story_board.png',
+    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/story_board.png',
+    size: 5.8
+  },
+  {
+    name: '仮面トークン',
+    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/mask_token.png',
+    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/mask_token.png',
+    size: 1
+  },
+]
+
 @Injectable()
 export class TabletopService {
   dragAreaElement: HTMLElement = document.body;
@@ -456,13 +561,44 @@ export class TabletopService {
 
   getContextMenuActionsForCreateObject(position: PointerCoordinate): ContextMenuAction[] {
     return [
-      this.getCreateCharacterMenu(position),
-      this.getCreateTableMaskMenu(position),
-      this.getCreateTerrainMenu(position),
-      this.getCreateTextNoteMenu(position),
-      this.getCreateTrumpMenu(position),
-      this.getCreateDiceSymbolMenu(position),
-    ];
+      this.getFuruyoniComponentMenu(position),
+      this.getContextMenuSubActionsForUdonarium(position)
+    ]
+  }
+
+  getContextMenuSubActionsForUdonarium(position: PointerCoordinate): ContextMenuAction {
+    return {
+      name: 'Udonarium',
+      action: null,
+      subActions: [
+        this.getCreateCharacterMenu(position),
+        this.getCreateTableMaskMenu(position),
+        this.getCreateTerrainMenu(position),
+        this.getCreateTextNoteMenu(position),
+        this.getCreateTrumpMenu(position),
+        this.getCreateDiceSymbolMenu(position),
+      ]
+    };
+  }
+
+  private getFuruyoniComponentMenu(position: PointerCoordinate): ContextMenuAction {
+    return {
+      name: 'コンポーネント',
+      action: null,
+      subActions: FURUYONI_COMPONENTS.map(({ name, front, back, size }) => ({
+        name, action: () => {
+          if (!ImageStorage.instance.get(front)) {
+            ImageStorage.instance.add(front);
+          }
+          if (!ImageStorage.instance.get(back)) {
+            ImageStorage.instance.add(back);
+          }
+          let card = Card.create(name, front, back, size);
+          card.location.x = position.x;
+          card.location.y = position.y;
+        }
+      }))
+    }
   }
 
   private getCreateCharacterMenu(position: PointerCoordinate): ContextMenuAction {
