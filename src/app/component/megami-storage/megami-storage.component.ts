@@ -701,13 +701,13 @@ const FURUYONI_COMPONENTS = {
   ],
   'シンラ (A1)': [
     {
-      name: '計略トークン',
+      name: '計略トークン(神算)',
       front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_blue.png',
       back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_back.png',
       size: 1.5
     },
     {
-      name: '計略トークン',
+      name: '計略トークン(鬼謀)',
       front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_red.png',
       back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_back.png',
       size: 1.5
