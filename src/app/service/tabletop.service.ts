@@ -449,16 +449,18 @@ export class TabletopService {
     tableSelecter.viewTableIdentifier = gameTable.identifier;
   }
 
+  private storeCardImage(url: string) {
+    if (!ImageStorage.instance.get(url)) {
+      ImageStorage.instance.add(url);
+    }
+  }
+
   putInitialSakuraTokens() {
     let front: string = './assets/furuyoni_commons_custom/sakura_token_2_1x1.png';
-    if (!ImageStorage.instance.get(front)) {
-      ImageStorage.instance.add(front);
-    }
+    this.storeCardImage(front);
 
     let back: string = './assets/furuyoni_commons_custom/dust_token_1x1.png';
-    if (!ImageStorage.instance.get(back)) {
-      ImageStorage.instance.add(back);
-    }
+    this.storeCardImage(front);
 
     [
       [67.35842462699682, 58.56010622363139, -30],
@@ -503,6 +505,40 @@ export class TabletopService {
       card.location.y = locatioonY;
       card.rotate = rotate;
     });
+  }
+
+  putInitialVigorCards() {
+    const front = './assets/furuyoni_commons_na/furuyoni_na/cards/vigor.png';
+    this.storeCardImage(front);
+
+    const back = './assets/furuyoni_commons_na/furuyoni_na/cards/vigor_b.png';
+    this.storeCardImage(back);
+
+    let vigor_1p = Card.create('集中力カード', front, back, 3);
+    vigor_1p.location.x = 1000;
+    vigor_1p.location.y = 900;
+
+    let vigor_2p = Card.create('集中力カード', front, back, 3);
+    vigor_2p.location.x = -150;
+    vigor_2p.location.y = 0;
+    vigor_2p.rotate = 180;
+  }
+
+  putInitialShrinkTokens() {
+    const front = './assets/furuyoni_commons_na/furuyoni_na/board_token/shrink.png';
+    this.storeCardImage(front);
+
+    const back = './assets/furuyoni_commons_na/furuyoni_na/board_token/shrink2.png';
+    this.storeCardImage(back);
+
+    let shrink_1p = Card.create('集中力カード', front, back, 1.5);
+    shrink_1p.location.x = 1000;
+    shrink_1p.location.y = 800;
+
+    let shrink_2p = Card.create('集中力カード', front, back, 1.5);
+    shrink_2p.location.x = -75;
+    shrink_2p.location.y = 125;
+    shrink_2p.rotate = 180;
   }
 
   makeDefaultTabletopObjects() {

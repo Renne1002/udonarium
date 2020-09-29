@@ -245,6 +245,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
       }
     }
     this.tabletopService.putInitialSakuraTokens();
+    this.tabletopService.putInitialVigorCards();
+    this.tabletopService.putInitialShrinkTokens();
   }
 
   save() {
