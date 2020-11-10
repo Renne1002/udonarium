@@ -460,7 +460,7 @@ export class TabletopService {
     this.storeCardImage(front);
 
     let back: string = './assets/furuyoni_commons_custom/dust_token_1x1.png';
-    this.storeCardImage(front);
+    this.storeCardImage(back);
 
     [
       [67.35842462699682, 58.56010622363139, -30],
