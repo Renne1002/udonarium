@@ -25,6 +25,13 @@ export class TabletopObject extends ObjectNode {
 
   private _imageFile: ImageFile = ImageFile.Empty;
   private _dataElements: { [name: string]: string } = {};
+  private _tags: string[] = [];
+
+  clone(): this {
+    const object = super.clone();
+    object.setTag(...this._tags);
+    return object;
+  }
 
   // GameDataElement getter/setter
   get rootDataElement(): DataElement {
@@ -46,6 +53,13 @@ export class TabletopObject extends ObjectNode {
       this._imageFile = file ? file : ImageFile.Empty;
     }
     return this._imageFile;
+  }
+
+  hasTag(tag: string): boolean {
+    return this._tags.includes(tag);
+  }
+  setTag(...tags: string[]) {
+    this._tags = this._tags.concat(tags);
   }
 
   protected createDataElements() {

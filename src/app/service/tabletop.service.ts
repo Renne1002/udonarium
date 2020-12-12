@@ -504,6 +504,7 @@ export class TabletopService {
       card.location.x = locationX;
       card.location.y = locatioonY;
       card.rotate = rotate;
+      card.setTag('sakuraToken');
     });
   }
 
