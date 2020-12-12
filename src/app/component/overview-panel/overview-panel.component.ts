@@ -9,6 +9,7 @@ import {
   OnDestroy,
   ViewChild,
 } from '@angular/core';
+import { Card, CardState } from '@udonarium/card';
 import { ObjectNode } from '@udonarium/core/synchronize-object/object-node';
 import { ObjectStore } from '@udonarium/core/synchronize-object/object-store';
 import { EventSystem } from '@udonarium/core/system';
@@ -45,8 +46,17 @@ export class OverviewPanelComponent implements AfterViewInit, OnDestroy {
 
   @Input() left: number = 0;
   @Input() top: number = 0;
+  @Input() cardState: CardState = CardState.BACK;
 
-  get imageUrl(): string { return this.tabletopObject && this.tabletopObject.imageFile ? this.tabletopObject.imageFile.url : ''; }
+  get imageUrl(): string {
+    if (!this.tabletopObject) return '';
+
+    if (this.tabletopObject instanceof Card) {
+      return this.cardState == CardState.FRONT ? this.tabletopObject.frontImage.url : this.tabletopObject.backImage.url;
+    } else {
+      return this.tabletopObject.imageFile.url
+    }
+  }
   get hasImage(): boolean { return 0 < this.imageUrl.length; }
 
   get inventoryDataElms(): DataElement[] { return this.tabletopObject ? this.getInventoryTags(this.tabletopObject) : []; }

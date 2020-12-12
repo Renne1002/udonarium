@@ -11,6 +11,7 @@ import {
 } from '@angular/core';
 import { EventSystem } from '@udonarium/core/system';
 import { TabletopObject } from '@udonarium/tabletop-object';
+import { CardState } from '@udonarium/card';
 import { OverviewPanelComponent } from 'component/overview-panel/overview-panel.component';
 import { ContextMenuService } from 'service/context-menu.service';
 import { PointerDeviceService } from 'service/pointer-device.service';
@@ -21,7 +22,7 @@ import { PointerDeviceService } from 'service/pointer-device.service';
 export class TooltipDirective implements OnInit, AfterViewInit, OnDestroy {
   private static activeTooltips: ComponentRef<OverviewPanelComponent>[] = [];
 
-  @Input('appTooltip') tabletopObject: TabletopObject;
+  @Input('appTooltip') tabletopObject: TabletopObject | [TabletopObject, CardState];
 
   private callbackOnMouseEnter = (e) => this.onMouseEnter(e);
   private callbackOnMouseLeave = (e) => this.onMouseLeave(e);
@@ -112,7 +113,12 @@ export class TooltipDirective implements OnInit, AfterViewInit, OnDestroy {
 
     this.tooltipComponentRef = parentViewContainerRef.createComponent(panelComponentFactory, parentViewContainerRef.length, injector);
 
-    this.tooltipComponentRef.instance.tabletopObject = this.tabletopObject;
+    if (this.tabletopObject instanceof TabletopObject) {
+      this.tooltipComponentRef.instance.tabletopObject = this.tabletopObject;
+    } else {
+      this.tooltipComponentRef.instance.tabletopObject = this.tabletopObject[0];
+      this.tooltipComponentRef.instance.cardState = this.tabletopObject[1];
+    }
     this.tooltipComponentRef.instance.left = this.pointerDeviceService.pointerX;
     this.tooltipComponentRef.instance.top = this.pointerDeviceService.pointerY;
 

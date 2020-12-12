@@ -2,9 +2,11 @@
   <button (click)="close(true)">シャッフルしてウィンドウを閉じる</button>
   <hr />
   <div *ngFor="let card of cardStack.cards; trackBy: trackByCard" class="box">
-    <div class="image-box" [appTooltip]="card">
-      <div class="image contain" [style.background-image]="'url(' + card?.frontImage?.url + ')' | safe: 'style' "></div>
-      <div class="image contain" [style.background-image]="'url(' + card?.backImage?.url + ')' | safe: 'style' "></div>
+    <div class="image-box">
+      <div class="image contain" [appTooltip]="[card, 0]"
+        [style.background-image]="'url(' + card?.frontImage?.url + ')' | safe: 'style' "></div>
+      <div class="image contain" [appTooltip]="[card, 1]"
+        [style.background-image]="'url(' + card?.backImage?.url + ')' | safe: 'style' "></div>
     </div>
     <div style="display: inline-block;">
       <span>{{ card.name }}</span>
