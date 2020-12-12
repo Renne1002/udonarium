@@ -115,7 +115,12 @@ export class CardStackComponent implements OnInit, AfterViewInit, OnDestroy {
         }
       })
       .on('CARD_STACK_DECREASED', event => {
-        if (event.data.cardStackIdentifier === this.cardStack.identifier && this.cardStack) this.changeDetector.markForCheck();
+        if (event.data.cardStackIdentifier === this.cardStack.identifier && this.cardStack) {
+          this.changeDetector.markForCheck();
+          if (this.isEmpty) {
+            this.cardStack.destroy();
+          }
+        }
       })
       .on('SYNCHRONIZE_FILE_LIST', event => {
         this.changeDetector.markForCheck();
