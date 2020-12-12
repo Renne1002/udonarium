@@ -22,6 +22,7 @@ import { FuruyoniComponent } from '../../furuyoni/furuyoni-component';
 import { FuruyoniMegami } from '../../furuyoni/furuyoni-megami';
 
 import { PanelService } from 'service/panel.service';
+import { PeerCursor } from '@udonarium/peer-cursor';
 
 const MEGAMI_CARDS = {
   'ユリナ': [
@@ -697,6 +698,8 @@ export class MegamiStorageComponent implements OnInit, OnDestroy, AfterViewInit 
   createTarot(tarot: Tarot) {
     let card = Card.create(tarot.name, tarot.image.url, this.tarotBack.url, 2);
     card.upright();
+    card.state = CardState.BACK;
+    card.owner = PeerCursor.myCursor.peerId;
     SoundEffect.play(PresetSound.cardDraw);
   }
 
