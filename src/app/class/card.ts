@@ -19,6 +19,8 @@ export class Card extends TabletopObject {
   @SyncVar() holder: string = '';
   @SyncVar() zindex: number = 0;
 
+  menu = [];
+
   get name(): string { return this.getCommonValue('name', ''); }
   get size(): number { return this.getCommonValue('size', 2); }
   set size(size: number) { this.setCommonValue('size', size); }

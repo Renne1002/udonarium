@@ -231,14 +231,21 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
           }
         }),
       ContextMenuSeparator,
+      ...this.card.menu,
+      ContextMenuSeparator,
       {
         name: '重なったカードで山札を作る', action: () => {
           this.createStack();
           SoundEffect.play(PresetSound.cardPut);
-        }
+        },
+        enabled: !this.card.hasTag('notStackable')
       },
       ContextMenuSeparator,
-      { name: 'カードを編集', action: () => { this.showDetail(this.card); } },
+      {
+        name: 'カードを編集',
+        action: () => { this.showDetail(this.card); },
+        enabled: !this.card.hasTag('notEditable')
+      },
       {
         name: 'コピーを作る', action: () => {
           let cloneObject = this.card.clone();
