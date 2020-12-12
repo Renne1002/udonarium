@@ -18,46 +18,10 @@ import { ContextMenuSeparator, ContextMenuService } from 'service/context-menu.s
 import { PointerCoordinate, PointerDeviceService } from 'service/pointer-device.service';
 import { Card, CardState } from '@udonarium/card';
 
-import { PanelService } from 'service/panel.service';
+import { FuruyoniComponent } from '../../furuyoni/furuyoni-component';
+import { FuruyoniMegami } from '../../furuyoni/furuyoni-megami';
 
-const MEGAMI_TAROTS = [
-  ['ユリナ', 'tarot_01.png'],
-  ['ユリナ (A1)', 'tarot_01_a1.png'],
-  ['サイネ', 'tarot_02.png'],
-  ['サイネ (A1)', 'tarot_02_a1.png'],
-  ['サイネ (A2)', 'tarot_02_a2.png'],
-  ['ヒミカ', 'tarot_03.png'],
-  ['ヒミカ (A1)', 'tarot_03_a1.png'],
-  ['トコヨ', 'tarot_04.png'],
-  ['トコヨ (A1)', 'tarot_04_a1.png'],
-  ['トコヨ (A2)', 'tarot_04_a2.png'],
-  ['オボロ', 'tarot_05.png'],
-  ['オボロ (A1)', 'tarot_05_a1.png'],
-  ['ユキヒ', 'tarot_06.png'],
-  ['ユキヒ (A1)', 'tarot_06_a1.png'],
-  ['シンラ', 'tarot_07.png'],
-  ['シンラ (A1)', 'tarot_07_a1.png'],
-  ['ハガネ', 'tarot_08.png'],
-  ['ハガネ (A1)', 'tarot_08_a1.png'],
-  ['チカゲ', 'tarot_09.png'],
-  ['チカゲ (A1)', 'tarot_09_a1.png'],
-  ['クルル', 'tarot_10.png'],
-  ['クルル (A1)', 'tarot_10_a1.png'],
-  ['サリヤ', 'tarot_11.png'],
-  ['サリヤ (A1)', 'tarot_11_a1.png'],
-  ['ライラ', 'tarot_12.png'],
-  ['ライラ (A1)', 'tarot_12_a1.png'],
-  ['ウツロ', 'tarot_13.png'],
-  ['ウツロ (A1)', 'tarot_13_a1.png'],
-  ['ホノカ', 'tarot_14.png'],
-  ['ホノカ (A1)', 'tarot_14_a1.png'],
-  ['コルヌ', 'tarot_15.png'],
-  ['ヤツハ', 'tarot_16.png'],
-  ['ハツミ', 'tarot_17.png'],
-  ['ミズキ', 'tarot_18.png'],
-  ['メグミ', 'tarot_19.png'],
-  ['カナエ', 'tarot_20.png']
-];
+import { PanelService } from 'service/panel.service';
 
 const MEGAMI_CARDS = {
   'ユリナ': [
@@ -678,173 +642,6 @@ const MEGAMI_CARDS = {
   ]
 }
 
-const FURUYONI_COMPONENTS = {
-  'シンラ': [
-    {
-      name: '計略トークン(神算)',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_blue.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_back.png',
-      size: 1.5
-    },
-    {
-      name: '計略トークン(鬼謀)',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_red.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_back.png',
-      size: 1.5
-    },
-    {
-      name: '計略ボード',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_board.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_board.png',
-      size: 3.2
-    },
-  ],
-  'シンラ (A1)': [
-    {
-      name: '計略トークン(神算)',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_blue.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_back.png',
-      size: 1.5
-    },
-    {
-      name: '計略トークン(鬼謀)',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_red.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_back.png',
-      size: 1.5
-    },
-    {
-      name: '計略ボード',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_board.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_board.png',
-      size: 3.2
-    },
-  ],
-  'サリヤ': [
-    {
-      name: 'マシンボード',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/machine_board.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/machine_board.png',
-      size: 4.4
-    },
-    {
-      name: '造花結晶 (1P)',
-      front: './assets/furuyoni_commons_custom/machine_token_1x1.png',
-      back: './assets/furuyoni_commons_custom/machine_token_1x1.png',
-      size: 1.2
-    },
-    {
-      name: '造花結晶 (2P)',
-      front: './assets/furuyoni_commons_custom/machine_token_2_1x1.png',
-      back: './assets/furuyoni_commons_custom/machine_token_2_1x1.png',
-      size: 1.2
-    },
-  ],
-  'サリヤ (A1)': [
-    {
-      name: 'マシンボード',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/machine_board.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/machine_board.png',
-      size: 4.4
-    },
-    {
-      name: '造花結晶 (1P)',
-      front: './assets/furuyoni_commons_custom/machine_token_1x1.png',
-      back: './assets/furuyoni_commons_custom/machine_token_1x1.png',
-      size: 1.2
-    },
-    {
-      name: '造花結晶 (2P)',
-      front: './assets/furuyoni_commons_custom/machine_token_2_1x1.png',
-      back: './assets/furuyoni_commons_custom/machine_token_2_1x1.png',
-      size: 1.2
-    },
-  ],
-  'ライラ': [
-    {
-      name: '風雷ボード',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/furai_board.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/furai_board.png',
-      size: 5.8
-    },
-    {
-      name: '風神トークン',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/fujin_0x.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/fujin_1x.png',
-      size: 1.5
-    },
-    {
-      name: '雷神トークン',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/raijin_0x.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/raijin_1x.png',
-      size: 1.5
-    },
-  ],
-  'ライラ (A1)': [
-    {
-      name: '風雷ボード',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/furai_board.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/furai_board.png',
-      size: 5.8
-    },
-    {
-      name: '風神トークン',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/fujin_0x.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/fujin_1x.png',
-      size: 1.5
-    },
-    {
-      name: '雷神トークン',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/raijin_0x.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/raijin_1x.png',
-      size: 1.5
-    },
-  ],
-  'コルヌ': [
-    {
-      name: '凍結トークン',
-      front: './assets/furuyoni_commons_custom/frozen_token_1x1.png',
-      back: './assets/furuyoni_commons_custom/frozen_token_1x1.png',
-      size: 1.2,
-    }
-  ],
-  'ミズキ': [
-    {
-      name: '兵舎ボード',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/barrack_board.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/barrack_board.png',
-      size: 5.8
-    },
-  ],
-  'メグミ': [
-    {
-      name: '土壌ボード',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/soil_board.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/soil_board.png',
-      size: 4.4
-    },
-    {
-      name: '種結晶',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/seed_token.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/seed_token.png',
-      size: 0.7
-    },
-  ],
-  'カナエ': [
-    {
-      name: '構想ボード',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/story_board.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/story_board.png',
-      size: 5.8
-    },
-    {
-      name: '仮面トークン',
-      front: './assets/furuyoni_commons_na/furuyoni_na/board_token/mask_token.png',
-      back: './assets/furuyoni_commons_na/furuyoni_na/board_token/mask_token.png',
-      size: 1
-    },
-  ]
-}
-
 interface Tarot {
   name: string;
   image: ImageFile;
@@ -946,9 +743,10 @@ export class MegamiStorageComponent implements OnInit, OnDestroy, AfterViewInit 
     return back;
   }
 
-  createDeck(name: string) {
-    let cardStack = CardStack.create(name);
-    MEGAMI_CARDS[name].forEach(([cardName, filename]) => {
+  createDeck(id: string) {
+    let megami = FuruyoniMegami.find(id);
+    let cardStack = CardStack.create(megami.name);
+    MEGAMI_CARDS[megami.name].forEach(([cardName, filename]) => {
       const path = `./assets/furuyoni_commons_na/furuyoni_na/cards/${filename}`;
       if (!this.fileStorageService.get(path)) {
         this.fileStorageService.add(path);
@@ -976,32 +774,24 @@ export class MegamiStorageComponent implements OnInit, OnDestroy, AfterViewInit 
         }
       }
     ];
-    if (FURUYONI_COMPONENTS[tarot.name]) {
-      FURUYONI_COMPONENTS[tarot.name].forEach(component => {
-        menu.push({
-          name: component.name, action: () => {
-            if (!this.fileStorageService.get(component.front)) {
-              this.fileStorageService.add(component.front);
-            }
-            if (!this.fileStorageService.get(component.back)) {
-              this.fileStorageService.add(component.back);
-            }
-            Card.create(component.name, component.front, component.back, component.size);
-          }
-        })
+    let megami = FuruyoniMegami.find(tarot.name);
+    if (megami.components) {
+      megami.components.forEach(componentId => {
+        let component = FuruyoniComponent.find(componentId);
+        menu.push({ name: component.name, action: () => component.create() })
       })
     }
     this.contextMenuService.open(position, menu, tarot.name);
   }
 
   private setupTarot() {
-    MEGAMI_TAROTS.forEach(([name, filename]) => {
-      const path = `./assets/furuyoni_commons_na/furuyoni_na/tarots/${filename}`;
+    FuruyoniMegami.all.forEach(megami => {
+      const path = `./assets/furuyoni_commons_na/furuyoni_na/tarots/${megami.tarot}`;
       if (!this.fileStorageService.get(path)) {
         this.fileStorageService.add(path);
       }
       const image = this.fileStorageService.get(path);
-      this.talotImages.push({ name, image })
+      this.talotImages.push({ name: megami.id, image })
     })
 
     const tarotBack = './assets/furuyoni_commons_na/furuyoni_na/tarots/tarotback.png';

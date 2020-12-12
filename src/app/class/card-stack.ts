@@ -154,7 +154,7 @@ export class CardStack extends TabletopObject {
     if (this.holder && this.holder != PeerCursor.myCursor.peerId) return null;
     if (!this.topCard) return this.putOnBottom(card);
     card.owner = '';
-    card.zindex = 0;
+    card.zindex = 1;
     card.state = CardState.BACK;
     let delta = Math.abs(card.rotate - this.rotate);
     if (180 < delta) delta = 360 - delta;
@@ -167,7 +167,7 @@ export class CardStack extends TabletopObject {
     if (!this.cardRoot) return null;
     if (this.holder && this.holder != PeerCursor.myCursor.peerId) return null;
     card.owner = '';
-    card.zindex = 0;
+    card.zindex = 1;
     card.state = CardState.BACK;
     let delta = Math.abs(card.rotate - this.rotate);
     if (180 < delta) delta = 360 - delta;

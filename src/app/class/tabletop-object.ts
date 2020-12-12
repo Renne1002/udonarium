@@ -19,18 +19,27 @@ export class TabletopObject extends ObjectNode {
     y: 0
   };
 
-  @SyncVar() posZ: number = 0;
+  @SyncVar() posZ: number = 1;
 
   get isVisibleOnTable(): boolean { return this.location.name === 'table' && (!this.parentIsAssigned || this.parentIsDestroyed); }
 
   private _imageFile: ImageFile = ImageFile.Empty;
   private _dataElements: { [name: string]: string } = {};
   private _tags: string[] = [];
+  private _forceBack: boolean = false;
 
   clone(): this {
     const object = super.clone();
     object.setTag(...this._tags);
     return object;
+  }
+
+  get forceBack() { return this._forceBack; }
+  set forceBack(flg: boolean) {
+    this._forceBack = flg;
+    if (flg) {
+      this.posZ = 0;
+    }
   }
 
   // GameDataElement getter/setter

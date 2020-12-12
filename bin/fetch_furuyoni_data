@@ -1,0 +1,48 @@
+#!/usr/bin/ruby
+
+require "net/http"
+require "json"
+
+eval File.read(File.expand_path("../.env", __dir__))
+
+def get_sheet(name)
+  endpoint = "https://sheets.googleapis.com/v4/spreadsheets/#{FURUYONI_COMPONENT_DATA_SHEET_KEY}/values"
+  uri = URI.parse "#{endpoint}/#{name}"
+  http = Net::HTTP.new(uri.host, uri.port)
+  http.use_ssl = uri.scheme === "https"
+  headers = {
+    "Content-Type" => "application/json",
+    "Authorization" => "Bearer #{GOOGLE_SHEET_API_ACCESS_KEY}"
+  }
+  res = http.get(uri.path, headers)
+  values = JSON.parse(res.body)["values"]
+  header, values = [values[0], values[1..-1]]
+  values.map do |v|
+    row = header.zip(v).to_h
+    yield row if block_given?
+    row
+  end
+end
+
+def write_file(filename, hash)
+  path = File.expand_path("../src/app/furuyoni/#{filename}.ts", __dir__)
+  const_name = filename.gsub("-", "_").upcase
+  data = "export const #{const_name} = #{JSON.pretty_generate(hash)}\n"
+  File.write(path, data)
+end
+
+megamis = get_sheet("megamis") do |row|
+  row["components"] = row["components"].split(",") if row["components"]
+end
+write_file("furuyoni-megami-data", megamis)
+
+components = get_sheet("components") do |row|
+  %w[front back].each do |key|
+    row[key] = row[key]
+      .gsub("NA_PATH", "./assets/furuyoni_commons_na/furuyoni_na")
+      .gsub("CUSTOM_PATH", "./assets/furuyoni_commons_custom")
+  end
+  row["forceBack"] = row["forceBack"] == "TRUE"
+  row["size"] = row["size"].to_f
+end
+write_file("furuyoni-component-data", components)

@@ -18,117 +18,13 @@ import { TableSelecter } from '@udonarium/table-selecter';
 import { TabletopObject } from '@udonarium/tabletop-object';
 import { Terrain } from '@udonarium/terrain';
 import { TextNote } from '@udonarium/text-note';
+import { FuruyoniComponent } from '../furuyoni/furuyoni-component';
 
 import { ContextMenuAction } from './context-menu.service';
 import { PointerCoordinate, PointerDeviceService } from './pointer-device.service';
 
 type ObjectIdentifier = string;
 type LocationName = string;
-
-const FURUYONI_COMPONENTS = [
-  {
-    name: '集中力カード',
-    front: './assets/furuyoni_commons_na/furuyoni_na/cards/vigor.png',
-    back: './assets/furuyoni_commons_na/furuyoni_na/cards/vigor_b.png',
-    size: 3
-  },
-  {
-    name: '畏縮トークン',
-    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/shrink.png',
-    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/shrink2.png',
-    size: 1.5
-  },
-  {
-    name: '計略トークン(神算)',
-    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_blue.png',
-    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_back.png',
-    size: 1.5
-  },
-  {
-    name: '計略トークン(鬼謀)',
-    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_red.png',
-    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_back.png',
-    size: 1.5
-  },
-  {
-    name: '計略ボード',
-    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_board.png',
-    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/plan_board.png',
-    size: 3.2
-  },
-  {
-    name: 'マシンボード',
-    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/machine_board.png',
-    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/machine_board.png',
-    size: 4.4
-  },
-  {
-    name: '造花結晶 (1P)',
-    front: './assets/furuyoni_commons_custom/machine_token_1x1.png',
-    back: './assets/furuyoni_commons_custom/machine_token_1x1.png',
-    size: 1.2
-  },
-  {
-    name: '造花結晶 (2P)',
-    front: './assets/furuyoni_commons_custom/machine_token_2_1x1.png',
-    back: './assets/furuyoni_commons_custom/machine_token_2_1x1.png',
-    size: 1.2
-  },
-  {
-    name: '風雷ボード',
-    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/furai_board.png',
-    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/furai_board.png',
-    size: 5.8
-  },
-  {
-    name: '風神トークン',
-    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/fujin_0x.png',
-    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/fujin_1x.png',
-    size: 1.5
-  },
-  {
-    name: '雷神トークン',
-    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/raijin_0x.png',
-    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/raijin_1x.png',
-    size: 1.5
-  },
-  {
-    name: '凍結トークン',
-    front: './assets/furuyoni_commons_custom/frozen_token_1x1.png',
-    back: './assets/furuyoni_commons_custom/frozen_token_1x1.png',
-    size: 1.2,
-  },
-  {
-    name: '兵舎ボード',
-    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/barrack_board.png',
-    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/barrack_board.png',
-    size: 5.8
-  },
-  {
-    name: '土壌ボード',
-    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/soil_board.png',
-    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/soil_board.png',
-    size: 4.4
-  },
-  {
-    name: '種結晶',
-    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/seed_token.png',
-    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/seed_token.png',
-    size: 0.7
-  },
-  {
-    name: '構想ボード',
-    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/story_board.png',
-    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/story_board.png',
-    size: 5.8
-  },
-  {
-    name: '仮面トークン',
-    front: './assets/furuyoni_commons_na/furuyoni_na/board_token/mask_token.png',
-    back: './assets/furuyoni_commons_na/furuyoni_na/board_token/mask_token.png',
-    size: 1
-  },
-]
 
 @Injectable()
 export class TabletopService {
@@ -509,34 +405,26 @@ export class TabletopService {
   }
 
   putInitialVigorCards() {
-    const front = './assets/furuyoni_commons_na/furuyoni_na/cards/vigor.png';
-    this.storeCardImage(front);
+    let vigor = FuruyoniComponent.find('vigor')
 
-    const back = './assets/furuyoni_commons_na/furuyoni_na/cards/vigor_b.png';
-    this.storeCardImage(back);
-
-    let vigor_1p = Card.create('集中力カード', front, back, 3);
+    let vigor_1p = vigor.create();
     vigor_1p.location.x = 1000;
     vigor_1p.location.y = 900;
 
-    let vigor_2p = Card.create('集中力カード', front, back, 3);
+    let vigor_2p = vigor.create();
     vigor_2p.location.x = -150;
     vigor_2p.location.y = 0;
     vigor_2p.rotate = 180;
   }
 
   putInitialShrinkTokens() {
-    const front = './assets/furuyoni_commons_na/furuyoni_na/board_token/shrink.png';
-    this.storeCardImage(front);
+    let shrink = FuruyoniComponent.find('shrink');
 
-    const back = './assets/furuyoni_commons_na/furuyoni_na/board_token/shrink2.png';
-    this.storeCardImage(back);
-
-    let shrink_1p = Card.create('集中力カード', front, back, 1.5);
+    let shrink_1p = shrink.create();
     shrink_1p.location.x = 1000;
     shrink_1p.location.y = 800;
 
-    let shrink_2p = Card.create('集中力カード', front, back, 1.5);
+    let shrink_2p = shrink.create();
     shrink_2p.location.x = -75;
     shrink_2p.location.y = 125;
     shrink_2p.rotate = 180;
@@ -622,15 +510,9 @@ export class TabletopService {
     return {
       name: 'コンポーネント',
       action: null,
-      subActions: FURUYONI_COMPONENTS.map(({ name, front, back, size }) => ({
-        name, action: () => {
-          if (!ImageStorage.instance.get(front)) {
-            ImageStorage.instance.add(front);
-          }
-          if (!ImageStorage.instance.get(back)) {
-            ImageStorage.instance.add(back);
-          }
-          let card = Card.create(name, front, back, size);
+      subActions: FuruyoniComponent.all.map(component => ({
+        name: component.name, action: () => {
+          let card = component.create();
           card.location.x = position.x;
           card.location.y = position.y;
         }
