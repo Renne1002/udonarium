@@ -77,7 +77,7 @@ export class MegamiStorageComponent implements OnInit, OnDestroy, AfterViewInit 
 
     let position = this.pointerDeviceService.pointers[0];
     let menu = [
-      { name: 'タロットを作成', action: megami.createTarot },
+      { name: 'タロットを作成', action: () => megami.createTarot() },
       ...megami.menuActions
     ];
     this.contextMenuService.open(position, menu, megami.name);
