@@ -6,7 +6,7 @@
   </div>
   <div class="peer-info">
     <div class="peer-name">
-      <input class="peer-name__input" [(ngModel)]="myPeer.name"  placeholder="ミコト" />
+      <input class="peer-name__input" [(ngModel)]="myPeer.name" (blur)="onBlurPeerName($event.target.value)" placeholder="ミコト" />
     </div>
     <div class="peer-id">
       <span style="user-select: none;">ID: </span>{{peerId}}

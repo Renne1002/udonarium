@@ -7,6 +7,7 @@ import { ObjectStore } from './core/synchronize-object/object-store';
 import { EventSystem, Network } from './core/system';
 
 interface UserSetting {
+  peerName: string;
   fixRotateX: boolean;
   fixRotateY: boolean;
   fixRotateZ: boolean;
@@ -41,7 +42,11 @@ export class PeerCursor extends GameObject {
   }
   updateUserSetting(key: keyof UserSetting, value: any) {
     const setting = this.userSetting;
-    setting[key] = value;
+    if (key == 'peerName') {
+      setting[key] = value;
+    } else {
+      setting[key] = value;
+    }
     this._userSetting = setting;
     LocalStorageService.instance.add({ key: 'user-setting', val: this._userSetting });
   }

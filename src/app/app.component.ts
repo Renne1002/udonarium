@@ -139,7 +139,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     AudioStorage.instance.get(PresetSound.sweep).isHidden = true;
 
     PeerCursor.createMyCursor();
-    const userIconUri = LocalStorageService.instance.fetch()['user-icon'];
+    PeerCursor.myCursor.name = PeerCursor.myCursor.userSetting.peerName || '';
+    const storage = LocalStorageService.instance.fetch();
+    const userIconUri = storage['user-icon'];
     if (userIconUri) {
       try {
         ImageStorage.instance.add(userIconUri);
