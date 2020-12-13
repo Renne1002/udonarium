@@ -8,7 +8,9 @@
     <div class="peer-name">
       <input class="peer-name__input" [(ngModel)]="myPeer.name"  placeholder="ミコト" />
     </div>
-    <div class="peer-id">ID: {{peerId}}</div>
+    <div class="peer-id">
+      <span style="user-select: none;">ID: </span>{{peerId}}
+    </div>
   </div>
 </div>
 <!--<div>host ID:{{networkService.hostPeerID}}</div>-->
