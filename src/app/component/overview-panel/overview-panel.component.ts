@@ -14,6 +14,7 @@ import { ObjectNode } from '@udonarium/core/synchronize-object/object-node';
 import { ObjectStore } from '@udonarium/core/synchronize-object/object-store';
 import { EventSystem } from '@udonarium/core/system';
 import { DataElement } from '@udonarium/data-element';
+import { PeerCursor } from '@udonarium/peer-cursor';
 import { TabletopObject } from '@udonarium/tabletop-object';
 import { GameObjectInventoryService } from 'service/game-object-inventory.service';
 import { PointerDeviceService } from 'service/pointer-device.service';
@@ -101,6 +102,10 @@ export class OverviewPanelComponent implements AfterViewInit, OnDestroy {
 
   ngOnDestroy() {
     EventSystem.unregister(this);
+  }
+
+  cardPreviewHeight(): number {
+    return Number(PeerCursor.myCursor.userSetting.cardPreviewHeight) || 330;
   }
 
   private initPanelPosition() {

@@ -31,7 +31,7 @@
   <div class="component-content is-small-size"
     [ngClass]="{ 'is-pointer-events-auto': !this.isPointerDragging, 'pointer-events-none': this.isPointerDragging }">
     <div *ngIf="hasImage" style="position: relative;">
-      <img class="card-image" [src]="imageUrl | safe: 'resourceUrl'" />
+      <img class="card-image" [src]="imageUrl | safe: 'resourceUrl'" [style.maxHeight.px]="this.cardPreviewHeight()" />
       <button class="zoom-button" (click)="chanageImageView(true)">
         <i class="material-icons">zoom_in</i>
       </button>

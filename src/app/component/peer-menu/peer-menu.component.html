@@ -27,6 +27,10 @@
     <input type="checkbox" [checked]="myPeer.userSetting.fixPositionY" (change)="onChangeFixPosition('Y', $event.target.checked)">Y軸
     <input type="checkbox" [checked]="myPeer.userSetting.fixPositionZ" (change)="onChangeFixPosition('Z', $event.target.checked)">Z軸
   </div>
+  <div>
+    カードプレビューサイズ: <input class="card-preview-size-input" type="number" [value]="myPeer.userSetting.cardPreviewHeight"
+      (change)="myPeer.updateUserSetting('cardPreviewHeight', $event.target.value)">
+  </div>
 </div>
 
 <!--<div>host ID:{{networkService.hostPeerID}}</div>-->

@@ -15,6 +15,7 @@ interface UserSetting {
   fixPositionX: boolean;
   fixPositionY: boolean;
   fixPositionZ: boolean;
+  cardPreviewHeight: number;
 }
 
 @SyncObject('PeerCursor')
@@ -38,17 +39,17 @@ export class PeerCursor extends GameObject {
         fixRotateX: false,
         fixRotateY: false,
         fixRotateZ: false,
+        fixPositionX: false,
+        fixPositionY: false,
+        fixPositionZ: false,
+        cardPreviewHeight: 330,
       }, storageSetting);
     }
     return this._userSetting;
   }
-  updateUserSetting(key: keyof UserSetting, value: any) {
+  updateUserSetting(key: string, value: any) {
     const setting = this.userSetting;
-    if (key == 'peerName') {
-      setting[key] = value;
-    } else {
-      setting[key] = value;
-    }
+    setting[key] = value;
     this._userSetting = setting;
     LocalStorageService.instance.add({ key: 'user-setting', val: this._userSetting });
   }

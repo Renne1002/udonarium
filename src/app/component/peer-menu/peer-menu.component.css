@@ -69,3 +69,13 @@
   color: dimgrey;
   margin-left: 6px;
 }
+
+.card-preview-size-input {
+  width: 50px;
+  border: none;
+  background-color: transparent;
+}
+.card-preview-size-input:hover {
+  border: inherit;
+  background-color: white;
+}
