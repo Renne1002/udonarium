@@ -6,6 +6,13 @@
   vertical-align: bottom;
 }
 
+.input-uri {
+  display: flex;
+}
+.input-uri__input {
+  flex-grow: 1;
+}
+
 .empty {
   line-height: 120px;
   vertical-align: middle;

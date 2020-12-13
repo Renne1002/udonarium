@@ -10,6 +10,7 @@ import { LobbyComponent } from 'component/lobby/lobby.component';
 import { AppConfigService } from 'service/app-config.service';
 import { ModalService } from 'service/modal.service';
 import { PanelService } from 'service/panel.service';
+import { LocalStorageService } from 'service/local-storage.service';
 
 @Component({
   selector: 'peer-menu',
@@ -24,6 +25,14 @@ export class PeerMenuComponent implements OnInit, OnDestroy, AfterViewInit {
   help: string = '';
 
   get myPeer(): PeerCursor { return PeerCursor.myCursor; }
+  get peerId(): string {
+    return this.networkService.isOpen
+      ? this.networkService.peerContext.id
+      : '???';
+  }
+  get peerName(): string {
+    return this.myPeer.name || 'ミコト';
+  }
 
   constructor(
     private ngZone: NgZone,
@@ -48,9 +57,17 @@ export class PeerMenuComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   changeIcon() {
-    this.modalService.open<string>(FileSelecterComponent).then(value => {
+    this.modalService.open<string>(FileSelecterComponent, { isAllowedUri: true }).then(value => {
       if (!this.myPeer || !value) return;
-      this.myPeer.imageIdentifier = value;
+      if (typeof value == 'string') {
+        this.myPeer.imageIdentifier = value;
+      } else {
+        const { identifier, uri } = value;
+        this.myPeer.imageIdentifier = identifier;
+        if (uri) {
+          LocalStorageService.instance.add({ key: 'user-icon', val: identifier });
+        }
+      }
     });
   }
 

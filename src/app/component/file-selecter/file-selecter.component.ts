@@ -22,8 +22,11 @@ import { PanelService } from 'service/panel.service';
 export class FileSelecterComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() isAllowedEmpty: boolean = false;
+  @Input() isAllowedUri: boolean = false;
   get images(): ImageFile[] { return ImageStorage.instance.images; }
   get empty(): ImageFile { return ImageFile.Empty; }
+
+  inputUriValue = null;
 
   constructor(
     private changeDetector: ChangeDetectorRef,
@@ -31,6 +34,7 @@ export class FileSelecterComponent implements OnInit, OnDestroy, AfterViewInit {
     private modalService: ModalService
   ) {
     this.isAllowedEmpty = this.modalService.option && this.modalService.option.isAllowedEmpty ? true : false;
+    this.isAllowedUri = this.modalService.option && this.modalService.option.isAllowedUri ? true : false;
   }
 
   ngOnInit() {
@@ -53,5 +57,14 @@ export class FileSelecterComponent implements OnInit, OnDestroy, AfterViewInit {
     console.log('onSelectedFile', file);
     EventSystem.call('SELECT_FILE', { fileIdentifier: file.identifier }, Network.peerId);
     this.modalService.resolve(file.identifier);
+  }
+
+  onSelectedUri() {
+    if (!ImageStorage.instance.get(this.inputUriValue)) {
+      ImageStorage.instance.add(this.inputUriValue);
+    }
+    const imageFile = ImageStorage.instance.get(this.inputUriValue);
+    EventSystem.call('SELECT_FILE', { fileIdentifier: imageFile.identifier }, Network.peerId);
+    this.modalService.resolve({ identifier: imageFile.identifier, uri: true });
   }
 }

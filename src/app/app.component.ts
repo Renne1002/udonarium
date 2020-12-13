@@ -44,6 +44,7 @@ import { SaveDataService } from 'service/save-data.service';
 import { GameObjectInventoryService } from 'service/game-object-inventory.service'
 import { TabletopService } from 'service/tabletop.service';
 import { fromEventPattern } from 'rxjs';
+import { LocalStorageService } from 'service/local-storage.service';
 
 @Component({
   selector: 'app-root',
@@ -138,8 +139,19 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     AudioStorage.instance.get(PresetSound.sweep).isHidden = true;
 
     PeerCursor.createMyCursor();
-    PeerCursor.myCursor.name = 'ミコト';
-    PeerCursor.myCursor.imageIdentifier = noneIconImage.identifier;
+    const userIconUri = LocalStorageService.instance.fetch()['user-icon'];
+    if (userIconUri) {
+      try {
+        ImageStorage.instance.add(userIconUri);
+        const image = ImageStorage.instance.get(userIconUri);
+        PeerCursor.myCursor.imageIdentifier = image.identifier;
+      } catch (e) {
+        console.log('アイコン画像の読み込みに失敗しました');
+        console.log(e);
+      }
+    } else {
+      PeerCursor.myCursor.imageIdentifier = noneIconImage.identifier;
+    }
 
     EventSystem.register(this)
       .on('UPDATE_GAME_OBJECT', event => { this.lazyNgZoneUpdate(event.isSendFromSelf); })
@@ -197,6 +209,8 @@ export class AppComponent implements AfterViewInit, OnDestroy {
     switch (componentName) {
       case 'PeerMenuComponent':
         component = PeerMenuComponent;
+        option.height = 300;
+        option.width = 400;
         break;
       case 'ChatWindowComponent':
         component = ChatWindowComponent;

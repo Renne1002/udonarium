@@ -63,7 +63,7 @@ export class GameTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   get isPointerDragging(): boolean { return this.pointerDeviceService.isDragging; }
 
-  private viewPotisonX: number = 100;
+  private viewPotisonX: number = 200;
   private viewPotisonY: number = 0;
   private viewPotisonZ: number = -500;
 

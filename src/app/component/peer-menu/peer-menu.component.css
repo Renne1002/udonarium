@@ -1,9 +1,37 @@
+.my-peer-container {
+  display: flex;
+  align-items: flex-start;
+}
+
 .image {
+  position: relative;
+  margin-right: 16px;
   padding: 0px;
-  width: 128px;
-  height: 128px;
+  width: 64px;
+  height: 64px;
   display: table-cell;
   vertical-align: top;
+  border: 2px solid black;
+  border-radius: 50%;
+}
+
+.image__filter {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  overflow: hidden;
+  border-radius: 50%;
+  color: transparent;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+  line-height: 64px;
+}
+.image__filter:hover {
+  color: black;
+  background-color: rgba(200, 200, 200, 0.8);
 }
 
 .image img{
@@ -18,4 +46,26 @@
   background-position: center top;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.user-setting {
+  flex-grow: 1;
+  padding-right: 8px;
+}
+
+.peer-name__input {
+  width: 100%;
+  border: none;
+  background-color: transparent;
+  font-size: 1.2rem;
+}
+.peer-name__input:hover {
+  border: inherit;
+  background-color: white;
+}
+
+.peer-id {
+  font-size: 0.8rem;
+  color: dimgrey;
+  margin-left: 6px;
 }

@@ -1,15 +1,15 @@
-<div *ngIf="myPeer">
-  <button (click)="changeIcon()">アイコンを変更する</button>
+<div *ngIf="myPeer" class="my-peer-container">
   <div *ngIf="myPeer.image" class="image cover" [style.background-image]="'url(' + myPeer.image.url + ')' | safe: 'style' "
     (click)="changeIcon()">
+    <div class="image__filter">画像を変更</div>
     <!--<img *ngIf="myPeer.image" [src]="myPeer.image.url | safe: 'resourceUrl'" />-->
   </div>
-  <span>あなたのニックネーム：  <input [(ngModel)]="myPeer.name"  placeholder="ニックネーム" /></span>
-</div>
-<div>
-  <span>あなたのID：<span *ngIf="networkService.isOpen" style="font-weight: bold;">{{networkService.peerContext.id}}</span>
-  <span *ngIf="!networkService.isOpen" style="font-weight: bold;">???</span>
-  </span>
+  <div class="user-setting">
+    <div class="peer-name">
+      <input class="peer-name__input" [(ngModel)]="myPeer.name"  placeholder="ミコト" />
+    </div>
+    <div class="peer-id">ID: {{peerId}}</div>
+  </div>
 </div>
 <!--<div>host ID:{{networkService.hostPeerID}}</div>-->
 <ng-container *ngIf="18 < networkService.peerId.length">
