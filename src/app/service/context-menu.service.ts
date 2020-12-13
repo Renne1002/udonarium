@@ -20,6 +20,7 @@ export interface ContextMenuAction {
   name: string,
   action?: Function,
   enabled?: boolean,
+  staysOpen?: boolean,
   type?: ContextMenuType,
   subActions?: ContextMenuAction[]
 }

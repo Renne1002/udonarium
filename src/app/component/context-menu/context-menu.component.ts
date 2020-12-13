@@ -127,7 +127,9 @@ export class ContextMenuComponent implements OnInit, OnDestroy, AfterViewInit {
     this.showSubMenu(action);
     if (action.action != null) {
       action.action();
-      this.close();
+      if (!action.staysOpen) {
+        this.close();
+      }
     }
   }
 

@@ -515,7 +515,9 @@ export class TabletopService {
           let card = component.create();
           card.location.x = position.x;
           card.location.y = position.y;
-        }
+          SoundEffect.play(PresetSound.piecePut);
+        },
+        staysOpen: true,
       }))
     }
   }
