@@ -21,6 +21,12 @@
     <input type="checkbox" [checked]="myPeer.userSetting.fixRotateY" (change)="onChangeFixRotate('Y', $event.target.checked)">Y軸
     <input type="checkbox" [checked]="myPeer.userSetting.fixRotateZ" (change)="onChangeFixRotate('Z', $event.target.checked)">Z軸
   </div>
+  <div>
+    移動の固定:
+    <input type="checkbox" [checked]="myPeer.userSetting.fixPositionX" (change)="onChangeFixPosition('X', $event.target.checked)">X軸
+    <input type="checkbox" [checked]="myPeer.userSetting.fixPositionY" (change)="onChangeFixPosition('Y', $event.target.checked)">Y軸
+    <input type="checkbox" [checked]="myPeer.userSetting.fixPositionZ" (change)="onChangeFixPosition('Z', $event.target.checked)">Z軸
+  </div>
 </div>
 
 <!--<div>host ID:{{networkService.hostPeerID}}</div>-->

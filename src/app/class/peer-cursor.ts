@@ -10,6 +10,9 @@ interface UserSetting {
   fixRotateX: boolean;
   fixRotateY: boolean;
   fixRotateZ: boolean;
+  fixPositionX: boolean;
+  fixPositionY: boolean;
+  fixPositionZ: boolean;
 }
 
 @SyncObject('PeerCursor')

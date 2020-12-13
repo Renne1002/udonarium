@@ -323,9 +323,9 @@ export class GameTableComponent implements OnInit, OnDestroy, AfterViewInit {
     if (!PeerCursor.myCursor.userSetting.fixRotateY) this.viewRotateY += rotateY;
     if (!PeerCursor.myCursor.userSetting.fixRotateZ) this.viewRotateZ += rotateZ;
 
-    this.viewPotisonX += transformX;
-    this.viewPotisonY += transformY;
-    this.viewPotisonZ += transformZ;
+    if (!PeerCursor.myCursor.userSetting.fixPositionX) this.viewPotisonX += transformX;
+    if (!PeerCursor.myCursor.userSetting.fixPositionY) this.viewPotisonY += transformY;
+    if (!PeerCursor.myCursor.userSetting.fixPositionZ) this.viewPotisonZ += transformZ;
 
     this.gameTable.nativeElement.style.transform = 'translateZ(' + this.viewPotisonZ + 'px) translateY(' + this.viewPotisonY + 'px) translateX(' + this.viewPotisonX + 'px) rotateY(' + this.viewRotateY + 'deg) rotateX(' + this.viewRotateX + 'deg) rotateZ(' + this.viewRotateZ + 'deg) ';
   }
