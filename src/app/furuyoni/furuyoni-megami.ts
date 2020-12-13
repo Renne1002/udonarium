@@ -707,6 +707,7 @@ export class FuruyoniMegami {
       }
       cardStack.putOnBottom(card);
     })
+    SoundEffect.play(PresetSound.piecePut);
     return cardStack;
   }
 
