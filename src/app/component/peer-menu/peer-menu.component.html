@@ -4,7 +4,7 @@
     <div class="image__filter">画像を変更</div>
     <!--<img *ngIf="myPeer.image" [src]="myPeer.image.url | safe: 'resourceUrl'" />-->
   </div>
-  <div class="user-setting">
+  <div class="peer-info">
     <div class="peer-name">
       <input class="peer-name__input" [(ngModel)]="myPeer.name"  placeholder="ミコト" />
     </div>
@@ -13,6 +13,16 @@
     </div>
   </div>
 </div>
+<hr/>
+<div class="user-setting">
+  <div>
+    回転の固定:
+    <input type="checkbox" [checked]="myPeer.userSetting.fixRotateX" (change)="onChangeFixRotate('X', $event.target.checked)">X軸
+    <input type="checkbox" [checked]="myPeer.userSetting.fixRotateY" (change)="onChangeFixRotate('Y', $event.target.checked)">Y軸
+    <input type="checkbox" [checked]="myPeer.userSetting.fixRotateZ" (change)="onChangeFixRotate('Z', $event.target.checked)">Z軸
+  </div>
+</div>
+
 <!--<div>host ID:{{networkService.hostPeerID}}</div>-->
 <ng-container *ngIf="18 < networkService.peerId.length">
   <hr/>

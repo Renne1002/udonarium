@@ -1,9 +1,16 @@
+import { LocalStorageService } from 'service/local-storage.service';
 import { ImageFile } from './core/file-storage/image-file';
 import { ImageStorage } from './core/file-storage/image-storage';
 import { SyncObject, SyncVar } from './core/synchronize-object/decorator';
 import { GameObject, ObjectContext } from './core/synchronize-object/game-object';
 import { ObjectStore } from './core/synchronize-object/object-store';
 import { EventSystem, Network } from './core/system';
+
+interface UserSetting {
+  fixRotateX: boolean;
+  fixRotateY: boolean;
+  fixRotateZ: boolean;
+}
 
 @SyncObject('PeerCursor')
 export class PeerCursor extends GameObject {
@@ -16,6 +23,25 @@ export class PeerCursor extends GameObject {
 
   get isMine(): boolean { return (PeerCursor.myCursor && PeerCursor.myCursor === this); }
   get image(): ImageFile { return ImageStorage.instance.get(this.imageIdentifier); }
+
+  private _userSetting: UserSetting;
+  get userSetting(): UserSetting {
+    if (!this._userSetting) {
+      const storageSetting = LocalStorageService.instance.fetch()['user-setting'];
+      this._userSetting = Object.assign({
+        fixRotateX: false,
+        fixRotateY: false,
+        fixRotateZ: false,
+      }, storageSetting);
+    }
+    return this._userSetting;
+  }
+  updateUserSetting(key: keyof UserSetting, value: any) {
+    const setting = this.userSetting;
+    setting[key] = value;
+    this._userSetting = setting;
+    LocalStorageService.instance.add({ key: 'user-setting', val: this._userSetting });
+  }
 
   // GameObject Lifecycle
   onStoreAdded() {

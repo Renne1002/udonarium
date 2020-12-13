@@ -319,9 +319,9 @@ export class GameTableComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private setTransform(transformX: number, transformY: number, transformZ: number, rotateX: number, rotateY: number, rotateZ: number) {
-    this.viewRotateX += rotateX;
-    this.viewRotateY += rotateY;
-    this.viewRotateZ += rotateZ;
+    if (!PeerCursor.myCursor.userSetting.fixRotateX) this.viewRotateX += rotateX;
+    if (!PeerCursor.myCursor.userSetting.fixRotateY) this.viewRotateY += rotateY;
+    if (!PeerCursor.myCursor.userSetting.fixRotateZ) this.viewRotateZ += rotateZ;
 
     this.viewPotisonX += transformX;
     this.viewPotisonY += transformY;

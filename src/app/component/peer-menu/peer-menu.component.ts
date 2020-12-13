@@ -71,6 +71,16 @@ export class PeerMenuComponent implements OnInit, OnDestroy, AfterViewInit {
     });
   }
 
+  onChangeFixRotate(direction: string, checked: any) {
+    if (direction == 'X') {
+      this.myPeer.updateUserSetting('fixRotateX', checked);
+    } else if (direction == 'Y') {
+      this.myPeer.updateUserSetting('fixRotateY', checked);
+    } else if (direction == 'Z') {
+      this.myPeer.updateUserSetting('fixRotateZ', checked);
+    }
+  }
+
   private resetPeerIfNeeded() {
     if (Network.peerContexts.length < 1) {
       Network.open();
