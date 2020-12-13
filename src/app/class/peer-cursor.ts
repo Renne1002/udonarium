@@ -1,3 +1,4 @@
+import { GameTableComponent } from 'component/game-table/game-table.component';
 import { LocalStorageService } from 'service/local-storage.service';
 import { ImageFile } from './core/file-storage/image-file';
 import { ImageStorage } from './core/file-storage/image-storage';
@@ -27,6 +28,7 @@ export class PeerCursor extends GameObject {
 
   get isMine(): boolean { return (PeerCursor.myCursor && PeerCursor.myCursor === this); }
   get image(): ImageFile { return ImageStorage.instance.get(this.imageIdentifier); }
+  table: GameTableComponent;
 
   private _userSetting: UserSetting;
   get userSetting(): UserSetting {

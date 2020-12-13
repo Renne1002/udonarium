@@ -63,13 +63,35 @@ export class GameTableComponent implements OnInit, OnDestroy, AfterViewInit {
 
   get isPointerDragging(): boolean { return this.pointerDeviceService.isDragging; }
 
-  private viewPotisonX: number = 200;
-  private viewPotisonY: number = 0;
-  private viewPotisonZ: number = -500;
+  viewPotisonX: number = 200;
+  viewPotisonY: number = 0;
+  viewPotisonZ: number = -500;
 
-  private viewRotateX: number = 0;
-  private viewRotateY: number = 0;
-  private viewRotateZ: number = 0;
+  viewRotateX: number = 0;
+  viewRotateY: number = 0;
+  viewRotateZ: number = 0;
+
+  get positionInfo(): string {
+    let x = Math.floor(this.viewPotisonX);
+    let y = Math.floor(this.viewPotisonY);
+    let z = Math.floor(this.viewPotisonZ);
+    return `(${x},${y},${z})`
+  }
+
+  get rotateInfo(): string {
+    let x = Math.floor(this.viewRotateX);
+    let y = Math.floor(this.viewRotateY);
+    let z = Math.floor(this.viewRotateZ);
+    return `(${x},${y},${z})`
+  }
+
+  get isViewPoint1P(): boolean {
+    const rz = (this.viewRotateZ % 360 + 360) % 360;
+    return rz <= 90 || 270 < rz;
+  }
+  get isViewPoint2P(): boolean {
+    return !this.isViewPoint1P;
+  }
 
   private buttonCode: number = 0;
   private input: InputHandler = null;

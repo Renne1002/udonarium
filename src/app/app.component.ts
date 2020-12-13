@@ -45,6 +45,8 @@ import { GameObjectInventoryService } from 'service/game-object-inventory.servic
 import { TabletopService } from 'service/tabletop.service';
 import { fromEventPattern } from 'rxjs';
 import { LocalStorageService } from 'service/local-storage.service';
+import { GameTableComponent } from 'component/game-table/game-table.component';
+import { GameTable } from '@udonarium/game-table';
 
 @Component({
   selector: 'app-root',
@@ -54,6 +56,7 @@ import { LocalStorageService } from 'service/local-storage.service';
 export class AppComponent implements AfterViewInit, OnDestroy {
 
   @ViewChild('modalLayer', { read: ViewContainerRef, static: true }) modalLayerViewContainerRef: ViewContainerRef;
+  @ViewChild(GameTableComponent) gameTableComponent: GameTableComponent;
   private immediateUpdateTimer: NodeJS.Timer = null;
   private lazyUpdateTimer: NodeJS.Timer = null;
   private openPanelCount: number = 0;
@@ -194,6 +197,7 @@ export class AppComponent implements AfterViewInit, OnDestroy {
 
   ngAfterViewInit() {
     PanelService.defaultParentViewContainerRef = ModalService.defaultParentViewContainerRef = ContextMenuService.defaultParentViewContainerRef = this.modalLayerViewContainerRef;
+    PeerCursor.myCursor.table = this.gameTableComponent;
     // NOTE: don't show initial panels.
     // setTimeout(() => {
     //   this.panelService.open(PeerMenuComponent, { width: 500, height: 450, left: 100 });
