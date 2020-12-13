@@ -4,6 +4,7 @@ import { SyncObject, SyncVar } from './core/synchronize-object/decorator';
 import { ObjectNode } from './core/synchronize-object/object-node';
 import { ObjectStore } from './core/synchronize-object/object-store';
 import { DataElement } from './data-element';
+import { PeerCursor } from './peer-cursor';
 
 export interface TabletopLocation {
   name: string;
@@ -20,6 +21,19 @@ export class TabletopObject extends ObjectNode {
   };
 
   @SyncVar() posZ: number = 1;
+
+  constructor(identifier?: string) {
+    super(identifier);
+
+    const maxDiff = 200;
+    if (PeerCursor.myCursor.table.isViewPoint1P) {
+      this.location.x = -50 - maxDiff / 2 + (Math.random() * maxDiff);
+      this.location.y = 700 - maxDiff / 2 + (Math.random() * maxDiff);
+    } else {
+      this.location.x = 700 - maxDiff / 2 + (Math.random() * maxDiff);
+      this.location.y = 200 - maxDiff / 2 + (Math.random() * maxDiff);
+    }
+  }
 
   get isVisibleOnTable(): boolean { return this.location.name === 'table' && (!this.parentIsAssigned || this.parentIsDestroyed); }
 
