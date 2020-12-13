@@ -371,7 +371,7 @@ const MEGAMI_CARDS = {
     ['ぐらんがりばー', 'na_10_kururu_a1_s_3_ex1.png'],
     ['神渉装置:枢式', 'na_10_kururu_o_s_4.png'],
   ],
-  'sariya': [
+  'thallya': [
     ['Burning Steam', 'na_11_thallya_o_n_1.png'],
     ['Waving Edge', 'na_11_thallya_o_n_2.png'],
     ['Shield Charge', 'na_11_thallya_o_n_3.png'],
@@ -390,7 +390,7 @@ const MEGAMI_CARDS = {
     ['Form: NAGA', 'na_11_thallya_o_tf_2.png'],
     ['Form: GARUDA', 'na_11_thallya_o_tf_3.png'],
   ],
-  'sariya-a1': [
+  'thallya-a1': [
     ['Burning Steam', 'na_11_thallya_o_n_1.png'],
     ['Waving Edge', 'na_11_thallya_o_n_2.png'],
     ['Shield Charge', 'na_11_thallya_o_n_3.png'],
