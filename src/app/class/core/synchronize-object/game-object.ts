@@ -29,8 +29,11 @@ export class GameObject {
     this.context.identifier = identifier;
   }
 
+  upright() {}
+
   initialize() {
     ObjectStore.instance.add(this);
+    this.upright();
   }
 
   destroy() {
