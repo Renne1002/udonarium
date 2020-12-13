@@ -46,13 +46,15 @@ export class OverviewPanelComponent implements AfterViewInit, OnDestroy {
 
   @Input() left: number = 0;
   @Input() top: number = 0;
-  @Input() cardState: CardState = CardState.BACK;
+  @Input() cardState: CardState = null;
 
   get imageUrl(): string {
     if (!this.tabletopObject) return '';
 
     if (this.tabletopObject instanceof Card) {
-      return this.cardState == CardState.FRONT ? this.tabletopObject.frontImage.url : this.tabletopObject.backImage.url;
+      return this.cardState == null
+        ? this.tabletopObject.imageFile.url
+        : this.cardState == CardState.FRONT ? this.tabletopObject.frontImage.url : this.tabletopObject.backImage.url;
     } else {
       return this.tabletopObject.imageFile.url
     }
