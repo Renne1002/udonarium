@@ -1,6 +1,7 @@
 import { FURUYONI_COMPONENT_DATA } from './furuyoni-component-data';
 import { ImageStorage } from '../class/core/file-storage/image-storage';
 import { Card } from '../class/card';
+import { PresetSound, SoundEffect } from '@udonarium/sound-effect';
 
 export class FuruyoniComponent {
   constructor(
@@ -42,6 +43,7 @@ export class FuruyoniComponent {
     if (component.tags) {
       card.setTag(...component.tags);
     }
+    SoundEffect.play(PresetSound.piecePut);
     return card;
   }
 
