@@ -3,7 +3,7 @@
     <button (click)="onSelectedFile(empty)">画像なし</button>
   </span>
   <div class="input-uri" *ngIf="isAllowedUri">
-    <input [(ngModel)]="inputUriValue" class="input-uri__input">
+    <input [(ngModel)]="inputUriValue" class="input-uri__input" placeholder="画像をURLで指定">
     <button (click)="onSelectedUri()">設定する</button>
   </div>
   <span *ngFor="let file of images" class="image">
