@@ -25,7 +25,7 @@ export class TabletopObject extends ObjectNode {
 
   private _imageFile: ImageFile = ImageFile.Empty;
   private _dataElements: { [name: string]: string } = {};
-  private _tags: string[] = [];
+  @SyncVar() _tags: string[] = [];
   private _forceBack: boolean = false;
 
   clone(): this {

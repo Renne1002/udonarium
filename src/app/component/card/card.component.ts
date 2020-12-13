@@ -174,7 +174,7 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
     let distance = (this.doubleClickPoint.x - this.input.pointer.x) ** 2 + (this.doubleClickPoint.y - this.input.pointer.y) ** 2;
     if (distance < 10 ** 2) {
       console.log('onDoubleClick !!!!');
-      if (this.hasHolder && this.holder != PeerCursor.myCursor.peerId) return;
+      if (!this.card.hasTag('anyoneTurnable') && this.hasHolder && this.holder != PeerCursor.myCursor.peerId) return;
       if (this.hasOwner && !this.isHand) return;
       this.state = this.isVisible && !this.isHand ? CardState.BACK : CardState.FRONT;
       this.owner = '';

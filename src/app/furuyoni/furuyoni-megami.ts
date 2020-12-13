@@ -702,6 +702,9 @@ export class FuruyoniMegami {
         ImageStorage.instance.add(path);
       }
       let card = Card.create(cardName, path, this.getCardBack(filename));
+      if (filename.match(/na_09_chikage_o_p/)) { // TODO
+        card.setTag('anyoneTurnable');
+      }
       cardStack.putOnBottom(card);
     })
     return cardStack;
