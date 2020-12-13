@@ -44,5 +44,6 @@ components = get_sheet("components") do |row|
   end
   row["forceBack"] = row["forceBack"] == "TRUE"
   row["size"] = row["size"].to_f
+  row["tags"] = row["tags"].split(",") if row["tags"]
 end
 write_file("furuyoni-component-data", components)

@@ -5,7 +5,8 @@ export const FURUYONI_COMPONENT_DATA = [
     "front": "./assets/furuyoni_commons_na/furuyoni_na/cards/vigor.png",
     "back": "./assets/furuyoni_commons_na/furuyoni_na/cards/vigor_b.png",
     "size": 3.0,
-    "forceBack": true
+    "forceBack": true,
+    "tags": null
   },
   {
     "id": "shrink",
@@ -13,7 +14,8 @@ export const FURUYONI_COMPONENT_DATA = [
     "front": "./assets/furuyoni_commons_na/furuyoni_na/board_token/shrink.png",
     "back": "./assets/furuyoni_commons_na/furuyoni_na/board_token/shrink2.png",
     "size": 1.5,
-    "forceBack": false
+    "forceBack": false,
+    "tags": null
   },
   {
     "id": "umbrella",
@@ -21,7 +23,8 @@ export const FURUYONI_COMPONENT_DATA = [
     "front": "./assets/furuyoni_commons_na/furuyoni_na/cards/umbrella_a.png",
     "back": "./assets/furuyoni_commons_na/furuyoni_na/cards/umbrella_b.png",
     "size": 3.0,
-    "forceBack": true
+    "forceBack": true,
+    "tags": null
   },
   {
     "id": "plan-blue",
@@ -29,7 +32,8 @@ export const FURUYONI_COMPONENT_DATA = [
     "front": "./assets/furuyoni_commons_na/furuyoni_na/board_token/plan_blue.png",
     "back": "./assets/furuyoni_commons_na/furuyoni_na/board_token/plan_back.png",
     "size": 1.5,
-    "forceBack": false
+    "forceBack": false,
+    "tags": null
   },
   {
     "id": "plan-red",
@@ -37,7 +41,8 @@ export const FURUYONI_COMPONENT_DATA = [
     "front": "./assets/furuyoni_commons_na/furuyoni_na/board_token/plan_red.png",
     "back": "./assets/furuyoni_commons_na/furuyoni_na/board_token/plan_back.png",
     "size": 1.5,
-    "forceBack": false
+    "forceBack": false,
+    "tags": null
   },
   {
     "id": "plan-board",
@@ -45,7 +50,8 @@ export const FURUYONI_COMPONENT_DATA = [
     "front": "./assets/furuyoni_commons_na/furuyoni_na/board_token/plan_board.png",
     "back": "./assets/furuyoni_commons_na/furuyoni_na/board_token/plan_board.png",
     "size": 3.2,
-    "forceBack": true
+    "forceBack": true,
+    "tags": null
   },
   {
     "id": "machine-board",
@@ -53,23 +59,30 @@ export const FURUYONI_COMPONENT_DATA = [
     "front": "./assets/furuyoni_commons_na/furuyoni_na/board_token/machine_board.png",
     "back": "./assets/furuyoni_commons_na/furuyoni_na/board_token/machine_board.png",
     "size": 4.4,
-    "forceBack": true
+    "forceBack": true,
+    "tags": null
   },
   {
     "id": "machine-token-1",
     "name": "造花結晶 (1P)",
-    "front": "./assets/furuyoni_commons_custom/machine_token_1x1.png",
-    "back": "./assets/furuyoni_commons_custom/machine_token_1x1.png",
-    "size": 1.2,
-    "forceBack": false
+    "front": "./assets/furuyoni_commons_custom/machine_token_1x1_r45.png",
+    "back": "./assets/furuyoni_commons_custom/machine_token_b_1x1_r45.png",
+    "size": 1.0,
+    "forceBack": false,
+    "tags": [
+      "sakuraToken"
+    ]
   },
   {
     "id": "machine-token-2",
     "name": "造花結晶 (2P)",
-    "front": "./assets/furuyoni_commons_custom/machine_token_2_1x1.png",
-    "back": "./assets/furuyoni_commons_custom/machine_token_2_1x1.png",
-    "size": 1.2,
-    "forceBack": false
+    "front": "./assets/furuyoni_commons_custom/machine_token_2_1x1_r45.png",
+    "back": "./assets/furuyoni_commons_custom/machine_token_2_b_1x1_r45.png",
+    "size": 1.0,
+    "forceBack": false,
+    "tags": [
+      "sakuraToken"
+    ]
   },
   {
     "id": "furai-board",
@@ -77,7 +90,8 @@ export const FURUYONI_COMPONENT_DATA = [
     "front": "./assets/furuyoni_commons_na/furuyoni_na/board_token/furai_board.png",
     "back": "./assets/furuyoni_commons_na/furuyoni_na/board_token/furai_board.png",
     "size": 5.8,
-    "forceBack": true
+    "forceBack": true,
+    "tags": null
   },
   {
     "id": "fujin-token",
@@ -85,7 +99,8 @@ export const FURUYONI_COMPONENT_DATA = [
     "front": "./assets/furuyoni_commons_na/furuyoni_na/board_token/fujin_0x.png",
     "back": "./assets/furuyoni_commons_na/furuyoni_na/board_token/fujin_1x.png",
     "size": 1.5,
-    "forceBack": false
+    "forceBack": false,
+    "tags": null
   },
   {
     "id": "raijin-token",
@@ -93,15 +108,19 @@ export const FURUYONI_COMPONENT_DATA = [
     "front": "./assets/furuyoni_commons_na/furuyoni_na/board_token/raijin_0x.png",
     "back": "./assets/furuyoni_commons_na/furuyoni_na/board_token/raijin_1x.png",
     "size": 1.5,
-    "forceBack": false
+    "forceBack": false,
+    "tags": null
   },
   {
     "id": "frozen-token",
     "name": "凍結トークン",
-    "front": "./assets/furuyoni_commons_custom/frozen_token_1x1.png",
-    "back": "./assets/furuyoni_commons_custom/frozen_token_1x1.png",
-    "size": 1.2,
-    "forceBack": false
+    "front": "./assets/furuyoni_commons_custom/frozen_token_1x1_r45.png",
+    "back": "./assets/furuyoni_commons_custom/frozen_token_1x1_r45.png",
+    "size": 1.0,
+    "forceBack": false,
+    "tags": [
+      "sakuraToken"
+    ]
   },
   {
     "id": "barrack-board",
@@ -109,7 +128,8 @@ export const FURUYONI_COMPONENT_DATA = [
     "front": "./assets/furuyoni_commons_na/furuyoni_na/board_token/barrack_board.png",
     "back": "./assets/furuyoni_commons_na/furuyoni_na/board_token/barrack_board.png",
     "size": 5.8,
-    "forceBack": true
+    "forceBack": true,
+    "tags": null
   },
   {
     "id": "soil-board",
@@ -117,15 +137,19 @@ export const FURUYONI_COMPONENT_DATA = [
     "front": "./assets/furuyoni_commons_na/furuyoni_na/board_token/soil_board.png",
     "back": "./assets/furuyoni_commons_na/furuyoni_na/board_token/soil_board.png",
     "size": 4.4,
-    "forceBack": true
+    "forceBack": true,
+    "tags": null
   },
   {
     "id": "seed-token",
     "name": "種結晶",
-    "front": "./assets/furuyoni_commons_na/furuyoni_na/board_token/seed_token.png",
-    "back": "./assets/furuyoni_commons_na/furuyoni_na/board_token/seed_token.png",
-    "size": 0.7,
-    "forceBack": false
+    "front": "./assets/furuyoni_commons_custom/seed_token_r45.png",
+    "back": "./assets/furuyoni_commons_custom/seed_token_b_r45.png",
+    "size": 1.0,
+    "forceBack": false,
+    "tags": [
+      "sakuraToken"
+    ]
   },
   {
     "id": "story-board",
@@ -133,7 +157,8 @@ export const FURUYONI_COMPONENT_DATA = [
     "front": "./assets/furuyoni_commons_na/furuyoni_na/board_token/story_board.png",
     "back": "./assets/furuyoni_commons_na/furuyoni_na/board_token/story_board.png",
     "size": 5.8,
-    "forceBack": true
+    "forceBack": true,
+    "tags": null
   },
   {
     "id": "mask-token",
@@ -141,6 +166,7 @@ export const FURUYONI_COMPONENT_DATA = [
     "front": "./assets/furuyoni_commons_na/furuyoni_na/board_token/mask_token.png",
     "back": "./assets/furuyoni_commons_na/furuyoni_na/board_token/mask_token.png",
     "size": 1.0,
-    "forceBack": false
+    "forceBack": false,
+    "tags": null
   }
 ]

@@ -10,6 +10,7 @@ export class FuruyoniComponent {
     readonly back: string,
     readonly size: number,
     readonly forceBack: boolean,
+    readonly tags?: string[]
   ) {}
 
   static _all: FuruyoniComponent[];
@@ -23,7 +24,8 @@ export class FuruyoniComponent {
         data.front,
         data.back,
         data.size,
-        data.forceBack
+        data.forceBack,
+        data.tags,
       );
     });
   }
@@ -37,6 +39,9 @@ export class FuruyoniComponent {
     component.loadImage();
     let card = Card.create(component.name, component.front, component.back, component.size);
     if (component.forceBack) card.forceBack = true;
+    if (component.tags) {
+      card.setTag(...component.tags);
+    }
     return card;
   }
 
