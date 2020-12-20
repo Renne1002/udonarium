@@ -37,6 +37,10 @@ export class Card extends TabletopObject {
     let object = PeerCursor.find(this.holder);
     return object ? object.name : '';
   }
+  get holderColor(): string {
+    let object = PeerCursor.find(this.holder);
+    return object ? object.color : '';
+  }
 
   get hasOwner(): boolean { return PeerCursor.find(this.owner) != null; }
   get hasHolder(): boolean { return PeerCursor.find(this.holder) != null; }

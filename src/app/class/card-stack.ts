@@ -27,6 +27,10 @@ export class CardStack extends TabletopObject {
   }
   get hasOwner(): boolean { return PeerCursor.find(this.owner) != null; }
   get hasHolder(): boolean { return PeerCursor.find(this.holder) != null; }
+  get holderColor(): string {
+    let object = PeerCursor.find(this.holder);
+    return object ? object.color : '';
+  }
 
   private get cardRoot(): ObjectNode {
     for (let node of this.children) {
@@ -220,6 +224,7 @@ export class CardStack extends TabletopObject {
     cardRoot.initialize();
     object.appendChild(cardRoot);
     object.initialize();
+    object.hold(PeerCursor.myCursor.peerId);
 
     return object;
   }

@@ -1,5 +1,7 @@
 <div *ngIf="myPeer" class="my-peer-container">
-  <div *ngIf="myPeer.image" class="image cover" [style.background-image]="'url(' + myPeer.image.url + ')' | safe: 'style' "
+  <div *ngIf="myPeer.image" class="image cover"
+    [style.background-image]="'url(' + myPeer.image.url + ')' | safe: 'style' "
+    [style.border-color]="myPeer.color"
     (click)="changeIcon()">
     <div class="image__filter">画像を変更</div>
     <!--<img *ngIf="myPeer.image" [src]="myPeer.image.url | safe: 'resourceUrl'" />-->
@@ -10,6 +12,9 @@
     </div>
     <div class="peer-id">
       <span style="user-select: none;">ID: </span>{{peerId}}
+    </div>
+    <div>
+      <div class="peer-color" [style.background-color]="myPeer.color"></div>
     </div>
   </div>
 </div>

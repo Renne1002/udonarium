@@ -21,6 +21,7 @@ interface UserSetting {
 @SyncObject('PeerCursor')
 export class PeerCursor extends GameObject {
   @SyncVar() peerId: string = '';
+  @SyncVar() color: string = '#EF5350';
   @SyncVar() name: string = '';
   @SyncVar() imageIdentifier: string = '';
 

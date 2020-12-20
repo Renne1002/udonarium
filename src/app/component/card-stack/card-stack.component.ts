@@ -68,6 +68,10 @@ export class CardStackComponent implements OnInit, AfterViewInit, OnDestroy {
   get hasHolder(): boolean { return this.cardStack.hasHolder; }
   get ownerName(): string { return this.cardStack.ownerName; }
   get holderName(): string { return this.cardStack.holderName; }
+  get holderColor(): string { return this.cardStack.holderColor; }
+  get boxShadow(): string {
+    return this.hasHolder ? `${this.holderColor} 0px 0px 16px 6px` : 'none';
+  }
 
   get topCard(): Card { return this.cardStack.topCard; }
   get imageFile(): ImageFile { return this.cardStack.imageFile; }
@@ -260,7 +264,7 @@ export class CardStackComponent implements OnInit, AfterViewInit, OnDestroy {
       },
       ContextMenuSeparator,
       {
-        name: 'デッキの所持者になる', action: () => {
+        name: 'デッキの所有者になる', action: () => {
           this.cardStack.hold(PeerCursor.myCursor.peerId);
           SoundEffect.play(PresetSound.cardDraw);
         },

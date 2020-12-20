@@ -56,6 +56,10 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
   get hasHolder(): boolean { return this.card.hasHolder; }
   get ownerName(): string { return this.card.ownerName; }
   get holderName(): string { return this.card.holderName; }
+  get holderColor(): string { return this.card.holderColor; }
+  get boxShadow(): string {
+    return this.hasHolder ? `${this.holderColor} 0px 0px 12px 4px` : 'none';
+  }
 
   get imageFile(): ImageFile { return this.card.imageFile; }
   get frontImage(): ImageFile { return this.card.frontImage; }
