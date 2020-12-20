@@ -28,7 +28,7 @@
 </ng-container>
 
 <ng-template #overviewCard let-card="card">
-  <div class="component-content is-small-size"
+  <div class="component-content"
     [ngClass]="{ 'is-pointer-events-auto': !this.isPointerDragging, 'pointer-events-none': this.isPointerDragging }">
     <div *ngIf="hasImage" style="position: relative;">
       <img class="card-image" [src]="imageUrl | safe: 'resourceUrl'" [style.maxHeight.px]="this.cardPreviewHeight()" />
@@ -41,7 +41,7 @@
       </div>
     </div>
     <div *ngIf="0 < card?.name?.length" class="component-title title-background"
-      [ngClass]="{'with-button-marign': hasImage}">
+      [ngClass]="{'with-button-marign': hasImage}" style="width: 100%; box-sizing: border-box;">
       <ng-container *ngIf="card.isVisible == null || card.isVisible">{{card.name}}</ng-container>
       <ng-container *ngIf="card.isVisible != null && !card.isVisible">カード</ng-container>
     </div>
