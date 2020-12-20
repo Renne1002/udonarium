@@ -11,10 +11,11 @@
       <input class="peer-name__input" [(ngModel)]="myPeer.name" (blur)="onBlurPeerName($event.target.value)" placeholder="ミコト" />
     </div>
     <div class="peer-id">
+      <span class="peer-color"
+        [(colorPicker)]="myPeer.color"
+        [style.background-color]="myPeer.color">
+      </span>
       <span style="user-select: none;">ID: </span>{{peerId}}
-    </div>
-    <div>
-      <div class="peer-color" [style.background-color]="myPeer.color"></div>
     </div>
   </div>
 </div>

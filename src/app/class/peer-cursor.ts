@@ -9,6 +9,7 @@ import { EventSystem, Network } from './core/system';
 
 interface UserSetting {
   peerName: string;
+  peerColor: string;
   fixRotateX: boolean;
   fixRotateY: boolean;
   fixRotateZ: boolean;
@@ -21,7 +22,6 @@ interface UserSetting {
 @SyncObject('PeerCursor')
 export class PeerCursor extends GameObject {
   @SyncVar() peerId: string = '';
-  @SyncVar() color: string = '#EF5350';
   @SyncVar() name: string = '';
   @SyncVar() imageIdentifier: string = '';
 
@@ -37,6 +37,7 @@ export class PeerCursor extends GameObject {
     if (!this._userSetting) {
       const storageSetting = LocalStorageService.instance.fetch()['user-setting'];
       this._userSetting = Object.assign({
+        peerColor: '#EF5350',
         fixRotateX: false,
         fixRotateY: false,
         fixRotateZ: false,
@@ -53,6 +54,13 @@ export class PeerCursor extends GameObject {
     setting[key] = value;
     this._userSetting = setting;
     LocalStorageService.instance.add({ key: 'user-setting', val: this._userSetting });
+  }
+
+  get color(): string {
+    return this.userSetting.peerColor;
+  }
+  set color(color: string) {
+    this.updateUserSetting('peerColor', color);
   }
 
   // GameObject Lifecycle

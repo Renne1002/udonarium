@@ -27,6 +27,7 @@
     "jszip": "~3.1.5",
     "lzbase62": "^1.4.9",
     "msgpack-lite": "^0.1.26",
+    "ngx-color-picker": "^11.0.0",
     "pako": "^1.0.10",
     "rxjs": "^6.6.2",
     "tslib": "^2.0.0",
