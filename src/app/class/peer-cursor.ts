@@ -64,11 +64,11 @@ export class PeerCursor extends GameObject {
   set color(color: string) {
     this.updateUserSetting('peerColor', color);
     this.table.cardStackComponents.forEach(cardStackComponent => {
-      cardStackComponent.changeDetector.detectChanges();
+      cardStackComponent.cardStack.update();
     });
     this.table.cardComponents.forEach(cardComponent => {
-      cardComponent.changeDetector.detectChanges();
-    })
+      cardComponent.card.update();
+    });
   }
 
   // GameObject Lifecycle
