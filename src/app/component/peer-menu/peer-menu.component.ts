@@ -56,6 +56,11 @@ export class PeerMenuComponent implements OnInit, OnDestroy, AfterViewInit {
     EventSystem.unregister(this);
   }
 
+  otherPeerColor(peerId: string) {
+    let object = PeerCursor.find(peerId);
+    return object ? object.color : PeerCursor.DEFAULT_COLOR;
+  }
+
   changeIcon() {
     this.modalService.open<string>(FileSelecterComponent, { isAllowedUri: true }).then(value => {
       if (!this.myPeer || !value) return;
@@ -196,6 +201,6 @@ export class PeerMenuComponent implements OnInit, OnDestroy, AfterViewInit {
 
   findPeerName(peerId: string) {
     const peerCursor = PeerCursor.find(peerId);
-    return peerCursor ? peerCursor.name : '';
+    return peerCursor ? peerCursor.name : 'ミコト';
   }
 }

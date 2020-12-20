@@ -25,6 +25,8 @@ export class PeerCursor extends GameObject {
   @SyncVar() name: string = '';
   @SyncVar() imageIdentifier: string = '';
 
+  static DEFAULT_COLOR: '#EF5350' = '#EF5350';
+
   static myCursor: PeerCursor = null;
   private static hash: { [peerId: string]: string } = {};
 
@@ -32,12 +34,12 @@ export class PeerCursor extends GameObject {
   get image(): ImageFile { return ImageStorage.instance.get(this.imageIdentifier); }
   table: GameTableComponent;
 
-  private _userSetting: UserSetting;
+  @SyncVar() _userSetting: UserSetting;
   get userSetting(): UserSetting {
-    if (!this._userSetting) {
+    if (this.peerId == PeerCursor.myCursor.peerId && !this._userSetting) {
       const storageSetting = LocalStorageService.instance.fetch()['user-setting'];
       this._userSetting = Object.assign({
-        peerColor: '#EF5350',
+        peerColor: PeerCursor.DEFAULT_COLOR,
         fixRotateX: false,
         fixRotateY: false,
         fixRotateZ: false,
