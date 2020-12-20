@@ -84,7 +84,7 @@ export class CardComponent implements OnInit, OnDestroy, AfterViewInit {
     private contextMenuService: ContextMenuService,
     private panelService: PanelService,
     private elementRef: ElementRef<HTMLElement>,
-    private changeDetector: ChangeDetectorRef,
+    public changeDetector: ChangeDetectorRef,
     private tabletopService: TabletopService,
     private pointerDeviceService: PointerDeviceService
   ) { }
