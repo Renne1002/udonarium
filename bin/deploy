@@ -1,0 +1,3 @@
+#!/bin/bash
+
+aws s3 sync ./dist/udonarium s3://furuyoni-udonarium.renneseve.net
